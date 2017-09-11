@@ -1,4 +1,4 @@
-# Sinatra-Good-Reads-Clone
+# Sinatra Good Reads clone
 
 Portfolio project built to demonstrate the implementation of the following technologies:
 
