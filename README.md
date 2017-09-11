@@ -1,6 +1,7 @@
 # Sinatra-Good-Reads-Clone
 
-Good Reads clone built to learn the following technologies:
+Portfolio project built to demonstrate the implementation of the following technologies:
+
  * Sinatra web framework
  * ActiveRecord - associations & migrations(creating multiple tables, models and relationships) and query interface 
  * MCV design pattern
