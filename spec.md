@@ -16,3 +16,12 @@ Confirm
 - [ ] Your commit messages are meaningful
 - [ ] You made the changes in a commit that relate to the commit message
 - [ ] You don't include changes in a commit that aren't related to the commit message
+
+Deliverables
+
+1. While you're working on it, record a 30 min coding session with your favorite screen capture tool. During the session, either think out loud or not. It's up to you. You don't need to submit the video, but we may ask for it at a later time.
+2. Make sure to create a good README.md with a short description, install instructions, a contributors guide and a link to the license for your code.
+3. Make sure to check each box in your spec.md (replace the space between the square braces with an x) and explain next to each one how you've met the requirement *before* you submit your project.
+4. Prepare a short video demo (narration helps!) describing how a user would interact with your working application.
+5. Write a blog post about the project and process.
+6. When done, submit your GitHub repo's url, a link to your video demo, and a link to your blog post in the corresponding text boxes in the right rail. Hit "I'm done" to wrap it up.
