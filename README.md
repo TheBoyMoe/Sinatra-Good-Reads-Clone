@@ -7,6 +7,6 @@ Portfolio project built to demonstrate the implementation of the following techn
  * MCV design pattern
  * OOP design in Ruby
  * Sessions and Cookies
- * Restful routes & 7 basic REST actions
+ * Restful routes, CRUD & 7 basic REST actions
  * Controllers in Sinatra
- * User authentication in Sinatra
+ * User authentication in Sinatra using sessions (possibly add 3rd party auth at a later date)
