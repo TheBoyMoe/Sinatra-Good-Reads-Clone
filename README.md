@@ -10,3 +10,7 @@ Portfolio project built to demonstrate the implementation of the following techn
  * Restful routes, CRUD & 7 basic REST actions
  * Controllers in Sinatra
  * User authentication in Sinatra using sessions (possibly add 3rd party auth at a later date)
+ * Rack Flash messages to display information to the user
+ * Validate user input
+ * RSpec & TDD
+ * 3rd party authentication (optional)
