@@ -11,6 +11,14 @@ class UsersController < ApplicationController
 
   # users#create action - user registration
   post '/signup' do
-    binding.pry
+    user = User.new(params)
+    # binding.pry
+    if user.save
+      session[:user_id] = user.id
+      redirect :'/home'
+    else
+      flash[:message] = "Error registreing account, ensure all fields are complete and try again"
+      redirect :'/signup'
+    end
   end
 end
