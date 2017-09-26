@@ -24,6 +24,7 @@ describe 'SessionController' do
         User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
         params = {username: 'test user', password: 'test1234'}
         post '/login', params
+
         expect(last_response.status).to eq(302)
         follow_redirect!
         expect(last_response.status).to eq(200)
@@ -34,6 +35,7 @@ describe 'SessionController' do
         User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
         params = {username: 'test user', password: 'password'}
         post '/login', params
+
         expect(last_response.status).to eq(302)
         follow_redirect!
         expect(last_response.body).to include('Login')
@@ -42,7 +44,23 @@ describe 'SessionController' do
   end
 
   describe "/logout" do
+    context "logged in" do
+      it "to destroy the session and redirect the user to the login page" do
+        user = User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
+        get '/logout', {}, {'rack.session' => {user_id: user.id}}
 
+        expect(last_request.session[:user_id]).to eq(nil)
+        expect(last_response.location).to include('/login')
+      end
+    end
+
+    context "logged out" do
+      it "redirects the user to the login page" do
+        get '/logout'
+
+        expect(last_response.location).to include('/login')
+      end
+    end
   end
 
 end
