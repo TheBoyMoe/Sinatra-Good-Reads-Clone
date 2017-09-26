@@ -1,0 +1,23 @@
+<!-- navbar -->
+<header>
+  <div class="ui secondary pointing menu">
+
+      <% if logged_in? %>
+        <h1><a class="ui item" href="/shelves">Simplereads</a></h1>
+      <% else %>
+        <h1><a class="ui item" href="/">Simplereads</a></h1>
+      <% end %>
+
+      <!-- right-hand side menu -->
+      <div class="right menu">
+        <% if !logged_in? %>
+          <% if path_info == '/login' %>
+            <a class="ui item" href="/signup">signup</a>
+          <% else %>
+            <a class="ui item" href="/login">login</a>
+          <% end %>
+        <% else %>
+          <a class="ui item" href="/logout">logout</a>
+        <% end %>
+      </div>
+</header>
