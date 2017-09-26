@@ -31,6 +31,16 @@ describe 'SessionController' do
         expect(last_response.body).to include('Welcome')
       end
 
+      it "does not let a user login without providing a username and password" do
+        User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
+        params = {username: 'test user', password: ''}
+        post '/login', params
+
+        expect(last_response.status).to eq(302)
+        follow_redirect!
+        expect(last_response.body).to include('Login')
+      end
+
       it "re-loads the login page following unsuccessful login" do
         User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
         params = {username: 'test user', password: 'password'}
