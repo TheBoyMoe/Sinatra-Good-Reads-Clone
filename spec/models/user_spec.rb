@@ -27,16 +27,18 @@ describe 'User' do
   end
 
   context 'attributes' do
+    user = User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
     it "has a username" do
-
+      expect(user.username).to eq('test user')
     end
 
     it "has an email address" do
-
+      expect(user.email).to eq('test@example.com')
     end
 
-    it "has a password" do
-
+    it "has a secure password" do
+      expect(user.authenticate('password')).to eq(false)
+      expect(user.authenticate('test1234')).to eq(user)
     end
   end
 
@@ -54,11 +56,5 @@ describe 'User' do
     end
   end
 
-  context "authenticate" do
-    it "has a secure password" do
-      expect(@user.authenticate('password')).to eq(false)
-      expect(@user.authenticate('test1234')).to eq(@user)
-    end
-  end
 
 end
