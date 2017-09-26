@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+
 ENV["SINATRA_ENV"] = "test"
 
 require_relative '../config/environment'
