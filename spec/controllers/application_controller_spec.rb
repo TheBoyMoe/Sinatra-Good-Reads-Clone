@@ -5,7 +5,10 @@ describe 'ApplicationController' do
   describe "Homepage: GET '/'" do
     context "logged in" do
       it "loads the home page" do
-        # TODO redirect to  '/home'
+        user = User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
+        get '/', {}, {'rack.session' => {user_id: user.id}}
+
+        expect(last_response.location).to include('/home')
       end
     end
 
@@ -18,4 +21,24 @@ describe 'ApplicationController' do
 
     end
   end
+
+  describe "404, page not found" do
+    context "logged in" do
+      it "redirects user to home page" do
+        user = User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
+        get '/unknown', {}, {'rack.session' => {user_id: user.id}}
+
+        expect(last_response.location).to include('/home')
+      end
+    end
+
+    context "logged out" do
+      it "redirects user to login" do
+        get '/unknown'
+
+        expect(last_response.location).to include('/login')
+      end
+    end
+  end
+
 end
