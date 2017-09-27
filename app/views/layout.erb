@@ -6,14 +6,17 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.js"></script>
     <script type="text/javascript">
-      // $(document).ready(function(){
-      //   $('.flash-message').delay(4000).fadeOut();
-      // });
+      $(document).ready(function(){
+        // $('.flash-message').delay(4000).fadeOut();
+        $('.fa-times').click(function(){
+          $(this).parent().remove();
+        })
+      });
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.css">
     <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="/stylesheets/styles.css" type="text/css">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
   </head>
   <body>
     <%= erb :'/partials/_header' %>
