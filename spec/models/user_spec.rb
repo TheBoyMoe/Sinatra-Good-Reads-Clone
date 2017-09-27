@@ -12,19 +12,24 @@ describe 'User' do
     end
 
     it "is invalid without a password" do
-      expect(User.create(username: 'test user', email: 'test@example.com', password: nil))
+      expect(User.create(username: 'test user', email: 'test@example.com', password: nil)).to_not be_valid
     end
-  end
 
-  context 'uniqness' do
     it "ensures that the username is unique" do
+      User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
+      user = User.new(username: 'test user', email: 'user@example.com', password: 'test5678')
 
+      expect(user.save).to eq(false)
     end
 
     it "ensures that the email address is unique" do
+      User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
+      user = User.new(username: 'user test', email: 'test@example.com', password: 'test5678')
 
+      expect(user.save).to eq(false)
     end
   end
+
 
   context 'attributes' do
     user = User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
