@@ -1,10 +1,14 @@
-<h1>Welcome <%= @user.username%></h1>
+<div id="main" class="wrapper">
+  <h1>Welcome <%= @user.username%></h1>
 
-<% if flash.has?(:message) %>
-  <p class="flash-message left">
-    <%= flash[:message] %>
-  </p>
-<% end %>
+  <% if flash.has?(:message) %>
+    <p class="flash-message left">
+      <%= flash[:message] %>
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </p>
+  <% end %>
 
-<h3>We have some book recomendations</h3>
-<h3>check out the latest community reviews</h3>
+  <h3>We have some book recomendations</h3>
+  <h3>check out the latest community reviews</h3>
+
+</div>
