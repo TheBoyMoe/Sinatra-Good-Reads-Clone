@@ -16,7 +16,6 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       redirect :"/users/#{current_user.slug}"
     else
-      flash[:message] = "You need to logged in"
       redirect :'/login'
     end
   end

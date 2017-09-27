@@ -12,12 +12,19 @@ class UsersController < ApplicationController
   # users#create action - user registration
   post '/signup' do
     user = User.new(params)
-    if user.save
+    if !user.save
+      if params[:username] == '' || params[:email] == '' || params[:password] == ""
+        flash[:message] = "Error registering account, ensure all fields are complete and try again"
+      elsif User.find_by_slug(params[:username].downcase.gsub(' ', '-'))
+        flash[:message] = "Error registering account, that username is in use. Try another"
+      elsif User.find_by(email: params[:email])
+        flash[:message] = "Error registering account, that email address is in use."
+      end
+      redirect :'/signup'
+    else
+      # new user created, redirect them to their home page
       session[:user_id] = user.id
       redirect :"/users/#{user.slug}"
-    else
-      flash[:message] = "Error registreing account, ensure all fields are complete and try again"
-      redirect :'/signup'
     end
   end
 
