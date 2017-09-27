@@ -42,13 +42,18 @@ class ApplicationController < Sinatra::Base
 
     def login(params)
       # check the the user has been registered and that we can authenticate them
-      user = User.find_by(username: params[:username])
-      if user && user.authenticate(params[:password])
-        session[:user_id] = user.id
-        redirect :"/users/#{user.slug}"
-      else
+      user = User.find_by_slug(params[:username].downcase.gsub(' ', '-'))
+      if !user
         flash[:message] = "Account not found, check spelling and try again"
         redirect :'/login'
+      else
+        if user && user.authenticate(params[:password])
+          session[:user_id] = user.id
+          redirect :"/users/#{user.slug}"
+        else
+          flash[:message] = "Username and password combination do not match, check spelling and try again"
+          redirect :'/login'
+        end
       end
     end
 
