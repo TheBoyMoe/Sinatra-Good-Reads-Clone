@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   post '/signup' do
     user = User.new(params)
     if !user.save
-      if params[:username] == '' || params[:email] == '' || params[:password] == ""
+      if !params[:username] || params[:username] == '' || !params[:email] || params[:email] == '' || params[:password] == ""
         flash[:message] = "Error registering account, ensure all fields are complete and try again"
       elsif User.find_by_slug(params[:username].downcase.gsub(' ', '-'))
         flash[:message] = "Error registering account, that username is in use. Try another"
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       end
       redirect :'/signup'
     else
-      # new user created, redirect them to their home page
+      # new user created, redirect user to their home page
       session[:user_id] = user.id
       redirect :"/users/#{user.slug}"
     end
