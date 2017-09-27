@@ -4,11 +4,11 @@ describe 'SessionController' do
 
   describe "/login" do
     context 'logged in' do
-      it "redirects the user to the home page" do
+      it "redirects the user to their home page" do
         user = User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
         get '/login', {}, {'rack.session' => {user_id: user.id}}
 
-        expect(last_response.location).to include('/home')
+        expect(last_response.location).to include("/users/#{user.slug}")
       end
     end
 
@@ -20,7 +20,7 @@ describe 'SessionController' do
         expect(last_response.body).to include('Login')
       end
 
-      it "redirects the user to the home page following successful login" do
+      it "redirects the user to their home page following successful login" do
         User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
         params = {username: 'test user', password: 'test1234'}
         post '/login', params

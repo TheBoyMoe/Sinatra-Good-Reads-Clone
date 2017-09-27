@@ -4,11 +4,11 @@ describe 'ApplicationController' do
 
   describe "Homepage: GET '/'" do
     context "logged in" do
-      it "loads the home page" do
+      it "loads the user's home page" do
         user = User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
         get '/', {}, {'rack.session' => {user_id: user.id}}
 
-        expect(last_response.location).to include('/home')
+        expect(last_response.location).to include("/users/#{user.slug}")
       end
     end
 
@@ -24,11 +24,11 @@ describe 'ApplicationController' do
 
   describe "404, page not found" do
     context "logged in" do
-      it "redirects user to home page" do
+      it "redirects user to 404 page" do
         user = User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
         get '/unknown', {}, {'rack.session' => {user_id: user.id}}
 
-        expect(last_response.location).to include('/home')
+        expect(last_response.body).to include("Page Not Found")
       end
     end
 

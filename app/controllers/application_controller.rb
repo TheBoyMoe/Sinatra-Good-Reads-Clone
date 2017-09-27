@@ -14,22 +14,18 @@ class ApplicationController < Sinatra::Base
 
   get '/' do
     if logged_in?
-      redirect :'/home'
+      redirect :"/users/#{current_user.slug}"
     else
       flash[:message] = "You need to logged in"
       redirect :'/login'
     end
   end
 
-  get '/home' do
-    erb :index
-  end
-
   # handle 404 errors
   not_found do
     flash[:message] = "Page not found"
     if logged_in?
-      redirect :'/home'
+      erb :'404'
     else
       redirect :'/login'
     end
@@ -50,7 +46,7 @@ class ApplicationController < Sinatra::Base
       user = User.find_by(username: params[:username])
       if user && user.authenticate(params[:password])
         session[:user_id] = user.id
-        redirect :'/home'
+        redirect :"/users/#{user.slug}"
       else
         flash[:message] = "Account not found, check spelling and try again"
         redirect :'/login'
