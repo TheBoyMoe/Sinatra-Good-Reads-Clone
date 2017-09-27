@@ -3,7 +3,7 @@
 Portfolio project built to demonstrate the implementation of the following technologies:
 
  * Sinatra web framework
- * ActiveRecord - associations & migrations(creating multiple tables, models and relationships) and query interface 
+ * ActiveRecord - associations & migrations(creating multiple tables, models and relationships) and query interface
  * MCV design pattern
  * OOP design in Ruby
  * Sessions and Cookies
@@ -14,3 +14,8 @@ Portfolio project built to demonstrate the implementation of the following techn
  * Validate user input
  * RSpec & TDD
  * 3rd party authentication (optional)
+
+
+ ## Usage
+
+ To use this app, just clone, run `rake db:migrate` and then `shotgun`. Everything should be set up.
