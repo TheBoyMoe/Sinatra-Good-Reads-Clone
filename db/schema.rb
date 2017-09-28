@@ -34,12 +34,12 @@ ActiveRecord::Schema.define(version: 20170928100812) do
     t.text "content"
     t.integer "rating"
     t.integer "book_id"
+    t.integer "user_id"
   end
 
   create_table "shelves", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.string "genre"
     t.integer "user_id"
   end
 

@@ -30,7 +30,6 @@ describe 'User' do
     end
   end
 
-
   context 'attributes' do
     user = User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
     it "has a username" do
