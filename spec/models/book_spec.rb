@@ -64,4 +64,27 @@ describe 'Book' do
     end
 
   end
+
+  context "Book model implements 'slug' attribute" do
+    before do
+      @book = Book.create(title: "2001, A Space Odyssey", author: 'Arthur C Clarke', isbn13: '123456789')
+    end
+
+    it "can slug the title" do
+      expect(@book.title_slug).to eq('2001-a-space-odyssey')
+    end
+
+    it "can find a book based on the title slug" do
+      expect(Book.find_by_title_slug(@book.title_slug).title).to eq("2001, A Space Odyssey")
+    end
+
+    it "can slug the author" do
+      expect(@book.author_slug).to eq('arthur-c-clarke')
+    end
+
+    it "can find a book based on the author slug" do
+      expect(Book.find_by_author_slug(@book.author_slug).author).to eq('Arthur C Clarke')
+    end
+  end
+
 end
