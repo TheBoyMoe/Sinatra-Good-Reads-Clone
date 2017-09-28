@@ -10,12 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170926140916) do
+ActiveRecord::Schema.define(version: 20170928100812) do
+
+  create_table "book_shelves", force: :cascade do |t|
+    t.integer "book_id"
+    t.integer "shelve_id"
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.integer "goodread_book_id"
+    t.string "isbn13"
+    t.string "title"
+    t.string "author"
+    t.string "publisher"
+    t.string "image"
+    t.text "description"
+    t.integer "ratings_count"
+    t.integer "ratings_sum"
+    t.integer "year"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "content"
+    t.integer "rating"
+    t.integer "book_id"
+  end
+
+  create_table "shelves", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "genre"
+    t.integer "user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
     t.string "password_digest"
+    t.string "image"
   end
 
 end
