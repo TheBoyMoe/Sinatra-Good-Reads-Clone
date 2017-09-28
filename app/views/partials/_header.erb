@@ -10,6 +10,16 @@
 
       <!-- right-hand side menu -->
       <div class="right menu">
+        <% if path_info != '/login' && path_info != '/signup'   %>
+          <div class="ui item">
+            <form class="ui form" action="/search" accept-charset="UTF-8" method="post">
+              <div class="ui icon input">
+                <input type="text" name="query" id="query" placeholder="isbn, author, title"/>
+                <i class="circular search link icon" type="submit"></i>
+              </div>
+            </form>
+          </div>
+        <% end %>
         <% if !logged_in? %>
           <% if path_info == '/login' %>
             <a class="ui item" href="/signup">signup</a>

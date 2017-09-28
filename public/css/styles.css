@@ -72,6 +72,10 @@ ul {
   border: 1px solid rgba(34,36,38,.15);
 }
 
+.ui.icon.input i[type=submit] {
+  -webkit-appearance: none;
+}
+
 /*.ui.button.action {
   border-radius: 1.8rem;
   padding: 0.6em;
