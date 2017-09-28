@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 20170928100812) do
 
   create_table "book_shelves", force: :cascade do |t|
     t.integer "book_id"
-    t.integer "shelve_id"
+    t.integer "shelf_id"
   end
 
   create_table "books", force: :cascade do |t|

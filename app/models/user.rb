@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :shelves
+  has_many :reviews
   has_many :books, through: :shelves
   has_secure_password
 
