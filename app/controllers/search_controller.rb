@@ -1,14 +1,15 @@
 class SearchController < ApplicationController
 
-  post '/search' do
+  post '/results' do
     # find the book in the local database
     query = params[:query]
-    if query.to_i > 0
-      @book = Book.find_by(isbn13: query)
-    else
-      # try using title and author slugs
+    # search on ISBN
+    @book = Book.find_by_isbn_slug(query.gsub(/ -/,''))
+    if !@book
+      # search on title
       @book = Book.find_by_title_slug(query.downcase.gsub(/[,()#{}:]/, '').gsub(' ', '-'))
       if !@book
+        # search on author
         @book = Book.find_by_author_slug(query.downcase.gsub(' ', '-'))
       end
     end
