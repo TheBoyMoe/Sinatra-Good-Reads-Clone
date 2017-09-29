@@ -3,7 +3,7 @@
   <div class="ui secondary pointing menu">
 
       <% if logged_in? %>
-        <h1><a class="ui item" href="/shelves">Simplereads</a></h1>
+        <h1><a class="ui item" href="/users/<%= current_user.slug %>">Simplereads</a></h1>
       <% else %>
         <h1><a class="ui item" href="/">Simplereads</a></h1>
       <% end %>
@@ -14,7 +14,7 @@
           <div class="ui item">
             <form class="ui form" action="/search" accept-charset="UTF-8" method="post">
               <div class="ui icon input">
-                <input type="text" name="query" id="query" placeholder="isbn, author, title"/>
+                <input type="text" name="query" id="query" placeholder="Search isbn, author, title"/>
                 <i class="circular search link icon" type="submit"></i>
               </div>
             </form>
