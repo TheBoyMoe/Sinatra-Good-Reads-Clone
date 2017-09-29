@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     if params[:username] != '' && params[:password] != ''
       login(params)
     else
-      flash[:message] = "All fields need to be completed"
+      flash[:alert] = "All fields need to be completed"
       redirect :'/login'
     end
   end

@@ -3,13 +3,15 @@ require './config/environment'
 class ApplicationController < Sinatra::Base
 
   configure do
-    set :public_folder, 'public'
-    set :views, 'app/views'
-
     enable :sessions
-    use Rack::Flash
+    register Sinatra::Flash
+
     set :session_secret, "simple_reads_secret"
 
+    # helpers Sinatra::RedirectWithFlash
+
+    set :public_folder, 'public'
+    set :views, 'app/views'
   end
 
   get '/' do
@@ -20,12 +22,13 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+
   # handle 404 errors
   not_found do
-    flash[:message] = "Page not found"
     if logged_in?
       erb :'404'
     else
+      flash[:alert] = "You need to be logged in"
       redirect :'/login'
     end
   end
@@ -44,14 +47,14 @@ class ApplicationController < Sinatra::Base
       # check the the user has been registered and that we can authenticate them
       user = User.find_by_slug(params[:username].downcase.gsub(' ', '-'))
       if !user
-        flash[:message] = "Account not found, check spelling and try again"
+        flash[:alert] = "Account not found, check spelling and try again"
         redirect :'/login'
       else
         if user && user.authenticate(params[:password])
           session[:user_id] = user.id
           redirect :"/users/#{user.slug}"
         else
-          flash[:message] = "Username and password combination do not match, check spelling and try again"
+          flash[:alert] = "Username and password combination do not match, check spelling and try again"
           redirect :'/login'
         end
       end

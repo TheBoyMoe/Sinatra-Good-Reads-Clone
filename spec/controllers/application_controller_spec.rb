@@ -28,7 +28,7 @@ describe 'ApplicationController' do
         user = User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
         get '/unknown', {}, {'rack.session' => {user_id: user.id}}
 
-        expect(last_response.body).to include("Page Not Found")
+        expect(last_response.body).to include("Page not found")
       end
     end
 

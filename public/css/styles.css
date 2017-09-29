@@ -148,17 +148,22 @@ li a {
   text-decoration: none;
 }
 
-.flash-message {
-  text-align: center;
+.flash-message-wrapper {
+  margin-bottom: 1.0em;
+  font-size: 1.4em;
 }
 
-.fa-times {
-  cursor: pointer;
+a.close {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  font-size: 46px;
+  margin-left: 4px;
+  vertical-align: sub;
 }
 
-/*.actions .ui.button i {
-  color: rgba(0,0,0,0.4);
-}*/
+
 
 
 /* Override Semantic-ui styles */

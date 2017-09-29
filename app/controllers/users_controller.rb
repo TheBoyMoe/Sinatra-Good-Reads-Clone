@@ -14,11 +14,11 @@ class UsersController < ApplicationController
     user = User.new(params)
     if !user.save
       if !params[:username] || params[:username] == '' || !params[:email] || params[:email] == '' || params[:password] == ""
-        flash[:message] = "Error registering account, ensure all fields are complete and try again"
+        flash[:alert] = "Error registering account, ensure all fields are complete and try again"
       elsif User.find_by_slug(params[:username].downcase.gsub(' ', '-'))
-        flash[:message] = "Error registering account, that username is in use. Try another"
+        flash[:alert] = "Error registering account, that username is in use. Try another"
       elsif User.find_by(email: params[:email])
-        flash[:message] = "Error registering account, that email address is in use."
+        flash[:alert] = "Error registering account, that email address is in use."
       end
       redirect :'/signup'
     else

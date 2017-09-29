@@ -2,11 +2,11 @@
   <div id="main" class="signup-form wrapper">
     <h1>Signup</h1>
 
-    <% if flash.has?(:message) %>
-      <p class="flash-message">
-        <%= flash[:message] %>
-        <i class="fa fa-times" aria-hidden="true"></i>
-      </p>
+    <% if flash[:alert] %>
+      <div class="flash-message-wrapper">
+        <%= flash[:alert] %>
+        <a href="#" class="close">&times;</a>
+      </div>
     <% end %>
 
     <form class="ui form" action="/signup" method="post">

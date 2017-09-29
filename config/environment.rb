@@ -3,7 +3,8 @@ ENV['SINATRA_ENV'] ||= "development"
 require 'bundler/setup'
 Bundler.require(:default, ENV['SINATRA_ENV'])
 
-require 'rack-flash'
+require 'sinatra/flash'
+# require 'sinatra/redirect_with_flash'
 
 ActiveRecord::Base.establish_connection(
   :adapter => "sqlite3",
