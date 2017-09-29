@@ -76,21 +76,20 @@ ul {
   -webkit-appearance: none;
 }
 
-/*.ui.button.action {
-  border-radius: 1.8rem;
-  padding: 0.6em;
-  margin-right: 0;
-  float: right;
-}
-
-.ui.button.action i {
-  width: 1.0em;
-}*/
-
 .ui.button:hover,
 .ui.button:active,
 .ui.button:focus {
   background: #F5F8FA;
+}
+
+.ui.item.search-form {
+  padding-right: 3.4em !important;
+}
+
+.ui.item.search-form .ui.icon.input input[type="submit"] {
+  padding-right: 1.0em !important;
+  margin-left: 0.2em;
+  width: auto;
 }
 
 

@@ -11,11 +11,12 @@
       <!-- right-hand side menu -->
       <div class="right menu">
         <% if path_info != '/login' && path_info != '/signup'   %>
-          <div class="ui item">
+          <div class="ui item search-form">
             <form class="ui form" action="/search" accept-charset="UTF-8" method="post">
               <div class="ui icon input">
                 <input type="text" name="query" id="query" placeholder="Search isbn, author, title"/>
-                <i class="circular search link icon" type="submit"></i>
+                <i class="search icon"></i>
+                <input class="ui button" type="submit" name="search" value="Go">
               </div>
             </form>
           </div>

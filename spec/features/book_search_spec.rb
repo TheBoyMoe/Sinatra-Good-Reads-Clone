@@ -20,10 +20,12 @@ describe 'Book search' do
     end
 
     it "looks for the book based on it's ISBN number" do
+      fill_in 'query', with: '123456789'
+      click_button "Go"
 
-
-
-
+      expect(page.current_path).to eq('/search')
+      expect(page.body).to include("2001, A Space Odyssey")
+      expect(page.body).to include('Arthur C Clarke')
     end
 
     it "looks for the book based on the title" do
@@ -31,7 +33,7 @@ describe 'Book search' do
     end
 
     it "looks for the book based on the author" do
-      
+
     end
   end
 
