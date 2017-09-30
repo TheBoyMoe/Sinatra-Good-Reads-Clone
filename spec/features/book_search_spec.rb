@@ -60,7 +60,6 @@ describe 'Book search' do
       expect(page.current_path).to eq('/results')
       expect(page.body).to include("The Martian Chronicles")
       expect(page.body).to include("Ray Bradbury")
-      expect(page.body).to include(4.12)
     end
 
     it "looks for the book based on the author" do
@@ -70,7 +69,6 @@ describe 'Book search' do
       expect(page.current_path).to eq('/results')
       expect(page.body).to include("The Martian Chronicles")
       expect(page.body).to include("Ray Bradbury")
-      expect(page.body).to include(4.12)
     end
 
     it "looks for the book based on the title" do
@@ -80,7 +78,6 @@ describe 'Book search' do
       expect(page.current_path).to eq('/results')
       expect(page.body).to include("The Martian Chronicles")
       expect(page.body).to include("Ray Bradbury")
-      expect(page.body).to include(4.12)
     end
   end
 end
