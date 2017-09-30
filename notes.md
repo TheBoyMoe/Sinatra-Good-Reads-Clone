@@ -5,3 +5,4 @@
 3. [sinatra-redirect-with-flash gem ](https://github.com/vast/sinatra-redirect-with-flash)
 4. [Goodreads Api Docs](https://www.goodreads.com/api)
 5. [Goodreads Search example](https://www.goodreads.com/api/documentation)
+6. [Searching XML using Nokogiri](http://www.nokogiri.org/tutorials/searching_a_xml_html_document.html)

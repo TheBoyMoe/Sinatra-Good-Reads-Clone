@@ -16,6 +16,7 @@ gem 'bcrypt'
 gem "tux"
 gem 'sinatra-flash'
 gem 'sinatra-redirect-with-flash'
+gem 'nokogiri'
 
 group :test do
   gem 'rspec'

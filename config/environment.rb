@@ -5,7 +5,8 @@ Bundler.require(:default, ENV['SINATRA_ENV'])
 
 require 'sinatra/flash'
 require 'net/http'
-require 'uri'
+require 'open-uri'
+require 'nokogiri'
 
 ActiveRecord::Base.establish_connection(
   :adapter => "sqlite3",

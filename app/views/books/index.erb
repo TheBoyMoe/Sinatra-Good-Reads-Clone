@@ -1,4 +1,7 @@
 <div id="main" class="wrapper">
-  <!-- list all results -->
-  
+  <!-- list all books -->
+  <% @data.each do |book| %>
+    <p><%= book[:title] %></p>
+    <p><%= book[:author] %></p>
+  <% end %>
 </div>

@@ -10,12 +10,12 @@ class SearchController < ApplicationController
         @book = find_by_author(query)
         # otherwise search goodreads
         if !@book
-          puts find_by_api(query)
+          @data = find_by_api(query)
         end
       end
     end
 
-    # render
+    # TODO render
     if @book
       erb :'/books/show'
     elsif @data
@@ -39,8 +39,6 @@ class SearchController < ApplicationController
     end
 
     def find_by_api(query)
-      # Book.create(title: 'The Martian Chronicles', author: 'Ray Bradbury', rating: 4.12)
-      feed = FetchBookData.new(query)
-      feed.fetch_data
+      FetchBookData.new(query).parse_xml
     end
 end
