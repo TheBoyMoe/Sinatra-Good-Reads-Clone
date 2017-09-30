@@ -3,18 +3,17 @@ class SearchController < ApplicationController
   post '/results' do
     # find the book in the local database
     query = params[:query]
-    # search on ISBN
-    @book = Book.find_by_isbn_slug(query.gsub(/ -/,''))
+    @book = find_by_isbn(query)
     if !@book
-      # search on title
-      @book = Book.find_by_title_slug(query.downcase.gsub(/[,()#{}:]/, '').gsub(' ', '-'))
+      @book = find_by_title(query)
       if !@book
         # search on author
-        @book = Book.find_by_author_slug(query.downcase.gsub(' ', '-'))
+        @book = find_by_author(query)
       end
     end
 
     # otherwise search online
+
 
     # render
     if @book
@@ -23,4 +22,19 @@ class SearchController < ApplicationController
       not_found
     end
   end
+
+
+  def find_by_isbn(query)
+    Book.find_by_isbn_slug(query.gsub(/ -/,''))
+  end
+
+  def find_by_title(query)
+    Book.find_by_title_slug(query.downcase.gsub(/[,()#{}:]/, '').gsub(' ', '-'))
+  end
+
+  def find_by_author(query)
+    Book.find_by_author_slug(query.downcase.gsub(' ', '-'))
+  end
+
+
 end

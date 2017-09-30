@@ -3,7 +3,6 @@ require 'spec_helper'
 describe 'Book search' do
 
   before do
-    Book.create(title: "2001, A Space Odyssey", author: 'Arthur C Clarke', isbn13: '123456789')
     User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
     visit '/login'
     fill_in "username", with: "test user"
@@ -11,12 +10,18 @@ describe 'Book search' do
     click_button "Login"
   end
 
-  context "in the local database" do
-
+  context "Page" do
     it "displays a search field" do
       expect(page.current_path).to eq('/users/test-user')
       expect(page).to have_selector('form')
       expect(page).to have_field(:query)
+    end
+  end
+
+  context "search the local database" do
+
+    before do
+      Book.create(title: "2001, A Space Odyssey", author: 'Arthur C Clarke', isbn13: '123456789')
     end
 
     it "looks for the book based on it's ISBN number" do
@@ -49,15 +54,33 @@ describe 'Book search' do
 
   context "uses the goodreads api" do
     it "looks for the book based on it's ISBN number" do
+      fill_in 'query', with: '9780553278224'
+      click_button "Go"
 
+      expect(page.current_path).to eq('/results')
+      expect(page.body).to include("The Martian Chronicles")
+      expect(page.body).to include("Ray Bradbury")
+      expect(page.body).to include(4.12)
     end
 
     it "looks for the book based on the author" do
+      fill_in 'query', with: 'Ray Bradbury'
+      click_button "Go"
 
+      expect(page.current_path).to eq('/results')
+      expect(page.body).to include("The Martian Chronicles")
+      expect(page.body).to include("Ray Bradbury")
+      expect(page.body).to include(4.12)
     end
 
     it "looks for the book based on the title" do
+      fill_in 'query', with: 'The Martian Chronicles'
+      click_button "Go"
 
+      expect(page.current_path).to eq('/results')
+      expect(page.body).to include("The Martian Chronicles")
+      expect(page.body).to include("Ray Bradbury")
+      expect(page.body).to include(4.12)
     end
   end
 end
