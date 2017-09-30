@@ -1,9 +1,11 @@
 require './config/environment'
+require './config/local_env'
 
 if ActiveRecord::Migrator.needs_migration?
   raise 'Migrations are pending. Run `rake db:migrate` to resolve the issue.'
 end
 
+# enable path, delete rest methods
 use Rack::MethodOverride
 
 use SearchController

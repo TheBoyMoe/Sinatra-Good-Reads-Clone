@@ -50,6 +50,7 @@ GEM
       method_source (~> 0.8.1)
     public_suffix (3.0.0)
     rack (2.0.3)
+    rack-env (0.1.3)
     rack-protection (2.0.0)
       rack
     rack-test (0.6.3)
@@ -122,6 +123,7 @@ DEPENDENCIES
   capybara
   database_cleaner!
   pry
+  rack-env
   rack-test
   rake
   require_all

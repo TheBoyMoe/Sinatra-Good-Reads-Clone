@@ -3,15 +3,16 @@ require './config/environment'
 class ApplicationController < Sinatra::Base
 
   configure do
+
+    # enable session and flash messages
     enable :sessions
     register Sinatra::Flash
-
     set :session_secret, "simple_reads_secret"
 
-    # helpers Sinatra::RedirectWithFlash
-
+    # set public folders & views path
     set :public_folder, 'public'
     set :views, 'app/views'
+
   end
 
   get '/' do
