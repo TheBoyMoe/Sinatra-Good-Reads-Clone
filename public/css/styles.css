@@ -1,8 +1,9 @@
 /* General app styles */
 
 body .wrapper,
-.ui.secondary.pointing.menu {
-  max-width: 760px;
+.ui.secondary.pointing.menu,
+footer {
+  width: 760px;
   margin: 0 auto;
 }
 
@@ -41,12 +42,22 @@ ul {
 
 
 /* login/signup forms */
-.ui.form .field:last-child {
-  margin-bottom: 2.0em;
+.login-form,
+.signup-form {
+  padding-top: 8.0em;
+}
+
+.ui.form {
+  max-width: 60%;
+  margin: 0 auto;
 }
 
 .ui.form .field {
   margin-bottom: 1.2em;
+}
+
+.ui.form .field:last-child {
+  margin-bottom: 2.0em;
 }
 
 .signup-form .ui.form .field.password {
