@@ -8,9 +8,12 @@
     <script type="text/javascript">
       $(document).ready(function(){
         // $('.flash-message').delay(4000).fadeOut();
+        // remove flash message on click
         $('a.close').click(function(){
           $(this).parent().remove();
         })
+        // enable drop down menu
+        $('.ui.selection.dropdown').dropdown();
       });
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.css">

@@ -3,6 +3,8 @@
   <ul class="book-list">
     <% @data.each do |book| %>
       <li class="book-wrap">
+        
+        <!-- display book cover image and details -->
         <div class="book-details">
           <div class="book-image">
             <img src="<%= book[:image_url] %>" alt="Book cover image">
@@ -15,9 +17,21 @@
             <span class="book-publication-date"> &dash; published <%= book[:publication_date] %></span>
           </p>
         </div>
-        <div class="book-options-menu">
 
+        <!-- drop down selection menu -->
+        <div class="book-options-menu">
+          <div class="ui selection dropdown">
+            <input type="hidden" name="book-shelve">
+            <i class="dropdown icon"></i>
+            <div class="default text">add book to shelve</div>
+            <div class="menu">
+              <div class="item" data-value="2">read</div>
+              <div class="item" data-value="1">reading</div>
+              <div class="item" data-value="0">to read</div>
+            </div>
+          </div>
         </div>
+
       </li>
     <% end %>
   </ul>
