@@ -5,13 +5,14 @@
     <% else %>
       <ul class="book-list">
         <% @data.each do |book| %>
-          <li class="book-wrap">
+          <li class="book-wrap clearfix">
 
             <!-- display book cover image and details -->
-            <div class="book-details">
-              <div class="book-image">
-                <img class="ui small image" src="<%= book[:image_url] %>" alt="Book cover image">
-              </div>
+            <!-- <div class="book-details"> -->
+            <div class="book-image left">
+              <img class="ui small image" src="<%= book[:image_url] %>" alt="Book cover image">
+            </div>
+            <div class="book-info left">
               <p class="book-title"><%= book[:title] %></p>
               <p class="book-author">by <%= book[:author] %></p>
               <p class="book-rating">
@@ -20,9 +21,10 @@
                 <span class="book-publication-date"> &dash; published <%= book[:publication_date] %></span>
               </p>
             </div>
+            <!-- </div> -->
 
             <!-- drop down selection menu -->
-            <div class="book-options-menu">
+            <div class="book-options-menu right">
               <div class="ui selection dropdown">
                 <input type="hidden" name="book-shelve">
                 <i class="dropdown icon"></i>

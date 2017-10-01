@@ -19,13 +19,6 @@ header {
   border-bottom: 2px solid rgba(34,36,38,.15);
 }
 
-.left {
-  float: left;
-}
-
-.right {
-  float: right;
-}
 
 /* menu/nav bar */
 .ui.secondary.pointing.menu {
@@ -123,10 +116,51 @@ a.close {
 /* book list item */
 
 .ui.small.image {
-  width: 70px;
+  width: 65px;
 }
 
+.ui.selection.dropdown {
+  min-width: 11em;
+}
 
+.book-list {
+  width: 700px;
+}
+
+.book-list .book-wrap {
+  margin-bottom: 2.0em;
+  padding-bottom: 2.0em;
+  border-bottom: 1px solid;
+  border-color: rgba(181,181,181,0.40);
+}
+
+.book-list .book-image {
+  margin-right: 0.8em;
+}
+
+.book-list .book-info p {
+  margin-bottom: 0;
+}
+
+.book-list .book-info p.book-title {
+  font-weight: 400;
+  max-width: 450px;
+}
+
+.book-list .book-info p.book-author {
+  font-size: 1.2em;
+  margin-bottom: 0.8em;
+}
+
+.book-list .book-info p.book-rating {
+  font-size: 1.0em;
+  color: #888;
+}
+
+.ui.default.dropdown:not(.button)>.text,
+.ui.dropdown:not(.button)>.default.text {
+    color: rgba(101,101,101,.87);
+}
 
 /* Typography */
 body,
@@ -180,4 +214,29 @@ h1 {
 
 li a {
   text-decoration: none;
+}
+
+
+/* helper classes */
+
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    zoom: 1; /* ie 6/7 */
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
 }
