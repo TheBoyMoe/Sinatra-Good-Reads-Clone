@@ -175,3 +175,7 @@ a.close {
 .ui.secondary.pointing.menu {
   margin-bottom: 0;
 }
+
+.ui.small.image {
+  width: 100px;
+}
