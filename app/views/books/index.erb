@@ -1,7 +1,24 @@
 <div id="main" class="wrapper">
   <!-- list all books -->
-  <% @data.each do |book| %>
-    <p><%= book[:title] %></p>
-    <p><%= book[:author] %></p>
-  <% end %>
+  <ul class="book-list">
+    <% @data.each do |book| %>
+      <li class="book-wrap">
+        <div class="book-details">
+          <div class="book-image">
+            <img src="<%= book[:image_url] %>" alt="Book cover image">
+          </div>
+          <p class="book-title"><%= book[:title] %></p>
+          <p class="book-author">by <%= book[:author] %></p>
+          <p class="book-rating">
+            <span class="book-rating-avg"><%= book[:average_rating] %> avg rating by</span>
+            <span class="book-rating-count"><%= book[:ratings_count] %> users</span>
+            <span class="book-publication-date"> &dash; published <%= book[:publication_date] %></span>
+          </p>
+        </div>
+        <div class="book-options-menu">
+
+        </div>
+      </li>
+    <% end %>
+  </ul>
 </div>
