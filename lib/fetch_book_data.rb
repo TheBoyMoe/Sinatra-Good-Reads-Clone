@@ -108,7 +108,7 @@ class FetchBookData
       book[:reviews_count] = work.search('text_reviews_count').text
       book[:ratings_count] = work.search('ratings_count').text
       book[:average_rating] = work.search('average_rating').text
-      book[:publication_date] = work.search('original_publication_year')
+      book[:publication_date] = work.search('original_publication_year').text
       book[:goodreads_id] = work.search('best_book id').text
       book[:title] = work.search('best_book title').text
       book[:author] = work.search('best_book author name').text

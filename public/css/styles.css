@@ -47,7 +47,8 @@ ul {
   padding-top: 8.0em;
 }
 
-.ui.form {
+.login-form .ui.form,
+.signup-form .ui.form {
   max-width: 60%;
   margin: 0 auto;
 }
@@ -106,6 +107,13 @@ ul {
   width: auto;
 }
 
+/* save book form */
+.save-book-form .ui.button {
+  padding: 11px 11px;
+  font-size: 14px;
+  line-height: 14px;
+  border-radius: 4px;
+}
 
 /* flash message */
 .flash-message-wrapper {

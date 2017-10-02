@@ -9,3 +9,4 @@
 7. [Semantic-UI Dropdown Menu](https://semantic-ui.com/modules/dropdown.html)
 8. [Adding Ratings to a Rails App](https://www.sitepoint.com/ratyrate-add-rating-rails-app/)
 9. [Ratyrate Github Repo](https://github.com/wazery/ratyrate)
+10. [Goodreads git repo](https://github.com/goodreads)
