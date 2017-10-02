@@ -2,7 +2,7 @@ class BooksController < ApplicationController
 
   # books#create action
   post '/books' do
-    binding.pry
+
     # {
     #   "goodreads_id"=>"248301630",
     #   "title"=>"The Illustrated Man",
@@ -17,6 +17,25 @@ class BooksController < ApplicationController
     #   },
     #   "submit"=>"save"
     # }
+
+    # save book object
+    book = Book.new(
+      goodread_book_id: params[:goodreads_id],
+      title: params[:title],
+      author: params[:author],
+      image: params[:image_url],
+      year_published: params[:publication_date],
+      ratings_average: params[:average_rating],
+      ratings_count: params[:ratings_count],
+      book_shelve_name: params[:book_shelve][:name],
+      reviews_count: params[:reviews_count]
+    )
+
+    if book.save
+      flash[:alert] = "Book successfully saved to the '#{book.book_shelve_name}' book shelf"
+    else
+      flash[:alert] = "Error saving book, try again"
+    end
 
   end
 

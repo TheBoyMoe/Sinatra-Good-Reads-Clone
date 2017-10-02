@@ -12,8 +12,7 @@ describe 'Book' do
       image: '/images/cover_images/2001.png',
       description: 'an ancient and unseen alien race uses a device with the appearance of a large crystalline monolith to investigate worlds all across the galaxy and, if possible, to encourage the development of intelligent life.',
       ratings_count: 23456,
-      ratings_sum: 111222,
-      year: 1968
+      year_published: 1968
     )
 
     it "has a goodreads book id" do
@@ -51,16 +50,10 @@ describe 'Book' do
 
     it "has a ratings count" do
       expect(book.ratings_count).to eq(23456)
-
-    end
-
-    it "has a ratings sum" do
-      expect(book.ratings_sum).to eq(111222)
-
     end
 
     it "has a publication year" do
-      expect(book.year).to eq(1968)
+      expect(book.year_published).to eq(1968)
     end
 
   end
