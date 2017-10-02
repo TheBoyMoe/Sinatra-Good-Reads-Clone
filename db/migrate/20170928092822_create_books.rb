@@ -9,8 +9,8 @@ class CreateBooks < ActiveRecord::Migration[5.1]
       t.string :image
       t.text :description
       t.integer :ratings_count
-      t.integer :ratings_sum
-      t.integer :year
+      t.decimal :ratings_average
+      t.integer :year_published
     end
   end
 end

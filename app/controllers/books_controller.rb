@@ -2,7 +2,6 @@ class BooksController < ApplicationController
 
   # books#create action
   post '/books' do
-    binding.pry
 
     # {
     #   "goodreads_id"=>"248301630",
