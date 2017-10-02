@@ -1,4 +1,4 @@
-<div id="main" class="wrapper">
+<div class="main wrapper">
   <!-- list all books -->
     <% if @data.size == 0 %>
       <p class="no-results">No results found, check your spelling and try again</p>
@@ -32,7 +32,7 @@
                   <input type="hidden" name="reviews_count" value="<%= book[:reviews_count] %>">
 
                   <div class="ui selection dropdown">
-                    <input type="hidden" name="book[shelve-name]">
+                    <input type="hidden" name="book_shelve[name]">
                     <i class="dropdown icon"></i>
                     <div class="default text">add book to shelve</div>
                     <div class="menu">

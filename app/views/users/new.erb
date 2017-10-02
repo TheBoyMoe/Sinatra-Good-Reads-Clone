@@ -1,44 +1,42 @@
-<div id="main" class="wrapper">
-  <div id="main" class="signup-form wrapper">
-    <h1>Signup</h1>
+<div class="main signup-form wrapper">
+  <h1>Signup</h1>
 
-    <% if flash[:alert] %>
-      <div class="flash-message-wrapper">
-        <%= flash[:alert] %>
-        <a href="#" class="close">&times;</a>
+  <% if flash[:alert] %>
+    <div class="flash-message-wrapper">
+      <%= flash[:alert] %>
+      <a href="#" class="close">&times;</a>
+    </div>
+  <% end %>
+
+  <form class="ui form" action="/signup" method="post">
+
+    <div class="field username">
+      <label for="username">Username</label>
+      <input id="username" type="text" name="username" placeholder="Username" />
+    </div>
+
+    <div class="field email">
+      <label for="email">Email</label>
+      <input id="email" type="email" name="email" placeholder="Email" />
+    </div>
+
+    <div class="field password">
+      <label for="password">Password</label>
+      <input id="password" type="password" name="password" placeholder="Password" />
+    </div>
+
+    <!-- not 'wired up' -->
+    <div class="field terms">
+      <div class="ui checkbox">
+        <input id="terms" type="checkbox" />
+        <label for="terms">I agree to the Terms and Conditions</label>
       </div>
-    <% end %>
+    </div>
 
-    <form class="ui form" action="/signup" method="post">
+    <div class="field submit">
+      <input class="ui button" type="submit" value="Sign up">
+    </div>
 
-      <div class="field username">
-        <label for="username">Username</label>
-        <input id="username" type="text" name="username" placeholder="Username" />
-      </div>
+  </form>
 
-      <div class="field email">
-        <label for="email">Email</label>
-        <input id="email" type="email" name="email" placeholder="Email" />
-      </div>
-
-      <div class="field password">
-        <label for="password">Password</label>
-        <input id="password" type="password" name="password" placeholder="Password" />
-      </div>
-
-      <!-- not 'wired up' -->
-      <div class="field terms">
-        <div class="ui checkbox">
-          <input id="terms" type="checkbox" />
-          <label for="terms">I agree to the Terms and Conditions</label>
-        </div>
-      </div>
-
-      <div class="field submit">
-        <input class="ui button" type="submit" value="Sign up">
-      </div>
-
-    </form>
-
-  </div>
 </div>

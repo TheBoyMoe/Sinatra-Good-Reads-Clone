@@ -2,7 +2,7 @@ class BooksController < ApplicationController
 
   # books#create action
   post '/books' do
-
+    binding.pry
     # {
     #   "goodreads_id"=>"248301630",
     #   "title"=>"The Illustrated Man",
@@ -12,8 +12,8 @@ class BooksController < ApplicationController
     #   "average_rating"=>"4.13",
     #   "ratings_count"=>"58782",
     #   "reviews_count"=>"2691",
-    #   "book"=> {
-    #     "shelve-name"=>"reading"
+    #   "book_shelve"=> {
+    #     "name"=>"reading"
     #   },
     #   "submit"=>"save"
     # }

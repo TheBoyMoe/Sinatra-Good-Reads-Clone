@@ -7,11 +7,11 @@ footer {
   margin: 0 auto;
 }
 
-#main {
+.main {
   min-height: calc(100vh - 175px);
 }
 
-#main,
+.main,
 footer {
   padding: 24px 32px;
 }
@@ -42,8 +42,8 @@ ul {
 
 
 /* login/signup forms */
-.login-form,
-.signup-form {
+.main.login-form,
+.main.signup-form {
   padding-top: 8.0em;
 }
 
@@ -119,6 +119,7 @@ ul {
 .flash-message-wrapper {
   margin-bottom: 1.0em;
   font-size: 1.4em;
+  text-align: center;
 }
 
 a.close {
