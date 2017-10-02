@@ -32,7 +32,7 @@ class BooksController < ApplicationController
     )
 
     if book.save
-      flash[:alert] = "Book successfully saved to the '#{book.book_shelve_name}' book shelf"
+      flash[:alert] = "Book successfully saved to the '#{book.book_shelf_name}' book shelf"
     else
       flash[:alert] = "Error saving book, try again"
     end

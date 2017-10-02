@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170928100812) do
+ActiveRecord::Schema.define(version: 20171002184029) do
 
   create_table "book_shelves", force: :cascade do |t|
     t.integer "book_id"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20170928100812) do
     t.string "author"
     t.string "image_url"
     t.integer "year_published"
-    t.decimal "ratings_average"
+    t.float "ratings_average"
     t.integer "ratings_count"
     t.integer "reviews_count"
     t.string "book_shelf_name"
