@@ -10,25 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170928100812) do
+ActiveRecord::Schema.define(version: 20171002141750) do
 
   create_table "book_shelves", force: :cascade do |t|
     t.integer "book_id"
     t.integer "shelf_id"
   end
 
-  create_table "books", force: :cascade do |t|
-    t.integer "goodread_book_id"
-    t.string "isbn13"
-    t.string "title"
-    t.string "author"
-    t.string "publisher"
-    t.string "image"
-    t.text "description"
-    t.integer "ratings_count"
-    t.integer "ratings_sum"
-    t.integer "year"
-  end
+# Could not dump table "books" because of following StandardError
+#   Unknown type 'real' for column 'ratings_average'
 
   create_table "reviews", force: :cascade do |t|
     t.text "content"
