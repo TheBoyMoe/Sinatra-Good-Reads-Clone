@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171002143949) do
+ActiveRecord::Schema.define(version: 20170928100812) do
 
   create_table "book_shelves", force: :cascade do |t|
     t.integer "book_id"
@@ -18,18 +18,16 @@ ActiveRecord::Schema.define(version: 20171002143949) do
   end
 
   create_table "books", force: :cascade do |t|
-    t.integer "goodread_book_id"
-    t.string "isbn13"
+    t.integer "goodreads_id"
     t.string "title"
     t.string "author"
-    t.string "publisher"
-    t.string "image"
-    t.text "description"
-    t.integer "ratings_count"
-    t.decimal "ratings_average"
+    t.string "image_url"
     t.integer "year_published"
-    t.string "book_shelve_name"
+    t.decimal "ratings_average"
+    t.integer "ratings_count"
     t.integer "reviews_count"
+    t.string "book_shelve"
+    t.text "description"
   end
 
   create_table "reviews", force: :cascade do |t|

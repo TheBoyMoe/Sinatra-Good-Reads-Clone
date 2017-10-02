@@ -3,17 +3,16 @@ class SearchController < ApplicationController
   post '/results' do
     # find the book in the local database
     query = params[:query]
-    @book = find_by_isbn(query)
+
+    @book = find_by_title(query)
     if !@book
-      @book = find_by_title(query)
+      @book = find_by_author(query)
+      # otherwise search goodreads
       if !@book
-        @book = find_by_author(query)
-        # otherwise search goodreads
-        if !@book
-          @data = find_by_api(query)
-        end
+        @data = find_by_api(query)
       end
     end
+
 
     # TODO render
     if @book
@@ -26,9 +25,6 @@ class SearchController < ApplicationController
   end
 
   private
-    def find_by_isbn(query)
-      Book.find_by_isbn_slug(query.gsub(/ -/,''))
-    end
 
     def find_by_title(query)
       Book.find_by_title_slug(query.downcase.gsub(/[,()#{}:]/, '').gsub(' ', '-'))

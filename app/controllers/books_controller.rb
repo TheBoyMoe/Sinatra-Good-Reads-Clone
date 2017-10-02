@@ -20,14 +20,14 @@ class BooksController < ApplicationController
 
     # save book object
     book = Book.new(
-      goodread_book_id: params[:goodreads_id],
+      goodreads_id: params[:goodreads_id],
       title: params[:title],
       author: params[:author],
-      image: params[:image_url],
+      image_url: params[:image_url],
       year_published: params[:publication_date],
       ratings_average: params[:average_rating],
       ratings_count: params[:ratings_count],
-      book_shelve_name: params[:book_shelve][:name],
+      book_shelve: params[:book_shelve][:name],
       reviews_count: params[:reviews_count]
     )
 

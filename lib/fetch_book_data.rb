@@ -101,7 +101,7 @@ class FetchBookData
   end
 
   def parse_xml
-    # parse xml, returning an array of book instances
+    # parse xml, returning an array of book hashes
     doc = fetch_data
     doc.search('results work').collect do |work|
       book = {}

@@ -1,16 +1,16 @@
 class CreateBooks < ActiveRecord::Migration[5.1]
   def change
     create_table :books do |t|
-      t.integer :goodread_book_id
-      t.string :isbn13
+      t.integer :goodreads_id
       t.string :title
       t.string :author
-      t.string :publisher
-      t.string :image
-      t.text :description
-      t.integer :ratings_count
-      t.decimal :ratings_average
+      t.string :image_url
       t.integer :year_published
+      t.decimal :ratings_average
+      t.integer :ratings_count
+      t.integer :reviews_count
+      t.string :book_shelve
+      t.text :description
     end
   end
 end

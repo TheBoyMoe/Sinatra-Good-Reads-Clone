@@ -21,16 +21,7 @@ describe 'Book search' do
   context "search the local database" do
 
     before do
-      Book.create(title: "2001, A Space Odyssey", author: 'Arthur C Clarke', isbn13: '123456789')
-    end
-
-    it "looks for the book based on it's ISBN number" do
-      fill_in 'query', with: '123456789'
-      click_button "Go"
-
-      expect(page.current_path).to eq('/results')
-      expect(page.body).to include("2001, A Space Odyssey")
-      expect(page.body).to include('Arthur C Clarke')
+      Book.create(title: "2001, A Space Odyssey", author: 'Arthur C Clarke')
     end
 
     it "looks for the book based on the title" do
@@ -53,14 +44,6 @@ describe 'Book search' do
   end
 
   context "uses the goodreads api" do
-    it "looks for the book based on it's ISBN number" do
-      fill_in 'query', with: '9780553278224'
-      click_button "Go"
-
-      expect(page.current_path).to eq('/results')
-      expect(page.body).to include("The Martian Chronicles")
-      expect(page.body).to include("Ray Bradbury")
-    end
 
     it "looks for the book based on the author" do
       fill_in 'query', with: 'Ray Bradbury'
