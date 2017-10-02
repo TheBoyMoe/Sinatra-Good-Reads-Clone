@@ -27,7 +27,7 @@ class BooksController < ApplicationController
       year_published: params[:publication_date],
       ratings_average: params[:average_rating],
       ratings_count: params[:ratings_count],
-      book_shelve: params[:book_shelve][:name],
+      book_shelf_name: params[:book_shelf][:name],
       reviews_count: params[:reviews_count]
     )
 

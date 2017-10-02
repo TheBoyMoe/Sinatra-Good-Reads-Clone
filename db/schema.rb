@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20170928100812) do
     t.decimal "ratings_average"
     t.integer "ratings_count"
     t.integer "reviews_count"
-    t.string "book_shelve"
+    t.string "book_shelf_name"
     t.text "description"
   end
 

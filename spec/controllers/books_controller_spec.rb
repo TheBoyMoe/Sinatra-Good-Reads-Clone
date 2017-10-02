@@ -15,7 +15,7 @@ describe 'BookController' do
       average_rating: 4.19,
       ratings_count: 123456,
       reviews_count: 654123,
-      book_shelve: {
+      book_shelf: {
         name: 'to_read'
       }
     }
@@ -31,7 +31,7 @@ describe 'BookController' do
       expect(Book.find(1).year_published).to eq(params[:publication_date])
       expect(Book.find(1).ratings_average).to eq(params[:average_rating])
       expect(Book.find(1).ratings_count).to eq(params[:ratings_count])
-      expect(Book.find(1).book_shelve).to eq(params[:book_shelve][:name])
+      expect(Book.find(1).book_shelf_name).to eq(params[:book_shelf][:name])
       expect(Book.find(1).reviews_count).to eq(params[:reviews_count])
     end
 
