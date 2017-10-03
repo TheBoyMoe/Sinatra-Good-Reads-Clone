@@ -35,8 +35,11 @@ describe 'BookController' do
       expect(Book.find(1).reviews_count).to eq(params[:reviews_count])
     end
 
-    it "returns a flash message to the user" do
-      # TODO
+    it "does not save books already in the databse" do
+      Book.create(title: 'The Martian Chronicles', author: 'Ray Bradbury', goodreads_id: 123456)
+      post '/books', params
+
+      expect(Book.all.size).to eq(1)
     end
   end
 

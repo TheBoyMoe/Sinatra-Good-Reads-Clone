@@ -10,7 +10,7 @@ $(document).ready(function(){
   // remove flash message on click
   $('a.close').click(function(e){
     e.preventDefault();
-    $(this).parent().remove();
+    $(this).parent().hide();
   })
 
   var forms = document.querySelectorAll('li.book-wrap form');

@@ -18,24 +18,31 @@ class BooksController < ApplicationController
     #   "submit"=>"save"
     # }
 
-    # save book object
-    book = Book.new(
-      goodreads_id: params[:goodreads_id],
-      title: params[:title],
-      author: params[:author],
-      image_url: params[:image_url],
-      year_published: params[:publication_date],
-      ratings_average: params[:average_rating],
-      ratings_count: params[:ratings_count],
-      book_shelf_name: params[:book_shelf_name],
-      reviews_count: params[:reviews_count]
-    )
+    result = Book.all.find do |book|
+      book.goodreads_id == params[:goodreads_id].to_i
+    end
+    if !result
+      # save book object
+      book = Book.new(
+        goodreads_id: params[:goodreads_id],
+        title: params[:title],
+        author: params[:author],
+        image_url: params[:image_url],
+        year_published: params[:publication_date],
+        ratings_average: params[:average_rating],
+        ratings_count: params[:ratings_count],
+        book_shelf_name: params[:book_shelf_name],
+        reviews_count: params[:reviews_count]
+      )
 
-    # send success/filaure messages back to ajax request
-    if book.save
-      response.body = "#{params[:goodreads_id]}-Book successfully saved"
+      # send success/filaure messages back to ajax request
+      if book.save
+        response.body = "#{params[:goodreads_id]}-Book successfully saved"
+      else
+        response.body = "#{params[:goodreads_id]}-Error saving book"
+      end
     else
-      response.body = "#{params[:goodreads_id]}-Error saving book"
+      response.body = "#{params[:goodreads_id]}-Book has been previously saved"
     end
 
   end
