@@ -17,7 +17,8 @@ class ApplicationController < Sinatra::Base
 
   get '/' do
     if logged_in?
-      redirect :"/users/#{current_user.slug}"
+      # redirect :"/users/#{current_user.slug}"
+      erb :'index'
     else
       redirect :'/login'
     end
@@ -53,7 +54,8 @@ class ApplicationController < Sinatra::Base
       else
         if user && user.authenticate(params[:password])
           session[:user_id] = user.id
-          redirect :"/users/#{user.slug}"
+          # redirect :"/users/#{user.slug}"
+          redirect :'/'
         else
           flash[:alert] = "Username and password combination do not match, check spelling and try again"
           redirect :'/login'
