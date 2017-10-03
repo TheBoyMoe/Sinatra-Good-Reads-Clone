@@ -18,9 +18,6 @@ class BooksController < ApplicationController
     #   "submit"=>"save"
     # }
 
-    # ajax call not serializing book_shelf_name
-
-    # binding.pry
     # save book object
     book = Book.new(
       goodreads_id: params[:goodreads_id],
@@ -34,12 +31,11 @@ class BooksController < ApplicationController
       reviews_count: params[:reviews_count]
     )
 
-    # TODO
     # send success/filaure messages back to ajax request
     if book.save
-
+      response.body = "#{params[:goodreads_id]}-Book successfully saved"
     else
-
+      response.body = "#{params[:goodreads_id]}-Error saving book"
     end
 
   end

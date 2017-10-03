@@ -124,6 +124,7 @@ ul {
 
 .book-wrap .flash-message-wrapper {
   text-align: left;
+  display: none;
 }
 
 a.close {

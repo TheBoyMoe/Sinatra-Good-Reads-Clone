@@ -4,10 +4,10 @@
       <p class="no-results">No results found, check your spelling and try again</p>
     <% else %>
       <ul class="book-list">
-        <% @data.each.with_index do |book, i| %>
+        <% @data.each.with_index(1) do |book, i| %>
           <li class="book-wrap clearfix">
 
-            <div class="flash-message-wrapper">
+            <div class="flash-message-wrapper message-<%= book[:goodreads_id] %>">
               <span class="flash-message"></span>
               <a href="#" class="close">&times;</a>
             </div>
