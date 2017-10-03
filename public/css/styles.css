@@ -122,6 +122,10 @@ ul {
   text-align: center;
 }
 
+.book-wrap .flash-message-wrapper {
+  text-align: left;
+}
+
 a.close {
   display: inline-block;
   width: 22px;

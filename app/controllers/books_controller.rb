@@ -18,6 +18,9 @@ class BooksController < ApplicationController
     #   "submit"=>"save"
     # }
 
+    # ajax call not serializing book_shelf_name
+
+    # binding.pry
     # save book object
     book = Book.new(
       goodreads_id: params[:goodreads_id],
@@ -27,14 +30,16 @@ class BooksController < ApplicationController
       year_published: params[:publication_date],
       ratings_average: params[:average_rating],
       ratings_count: params[:ratings_count],
-      book_shelf_name: params[:book_shelf][:name],
+      book_shelf_name: params[:book_shelf_name],
       reviews_count: params[:reviews_count]
     )
 
+    # TODO
+    # send success/filaure messages back to ajax request
     if book.save
-      flash[:alert] = "Book successfully saved to the '#{book.book_shelf_name}' book shelf"
+
     else
-      flash[:alert] = "Error saving book, try again"
+
     end
 
   end
