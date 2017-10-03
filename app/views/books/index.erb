@@ -1,10 +1,10 @@
 <div class="main wrapper">
   <!-- list all books -->
-    <% if @data.size == 0 %>
+    <% if @books.size == 0 %>
       <p class="no-results">No results found, check your spelling and try again</p>
     <% else %>
       <ul class="book-list">
-        <% @data.each.with_index(1) do |book, i| %>
+        <% @books.each.with_index(1) do |book, i| %>
           <li class="book-wrap clearfix">
 
             <div class="flash-message-wrapper message-<%= book[:goodreads_id] %>">
