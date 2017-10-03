@@ -137,6 +137,21 @@ a.close {
   vertical-align: sub;
 }
 
+/* home page */
+.book-recomendation {
+  float: left;
+  width: 150px;
+}
+
+.book-recomendation h2,
+.book-recomendation p {
+  margin: 0;
+}
+
+.ui.image img {
+  width: 150px;
+  height: 250px;
+}
 
 /* book list item */
 
