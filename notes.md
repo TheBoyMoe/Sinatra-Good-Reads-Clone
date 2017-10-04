@@ -15,3 +15,9 @@
 13. [Intro to Rack](http://rubylearning.com/blog/2013/04/02/whats-rack/)
 14. [Advanced Rack](http://gabebw.com/blog/2015/08/10/advanced-rack)
 15. [Photo by Annie Spratt on Unsplash](https://unsplash.com/photos/AE1XpXLxXSA)
+
+
+## TODO
+1. check book exists in the dbase prior to saving
+2. display to-read, read and reading shelves.
+3. add reviews

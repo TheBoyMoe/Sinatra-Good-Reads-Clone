@@ -18,7 +18,8 @@ class BooksController < ApplicationController
 
     # TODO re-write - many users can save the same book
     result = Book.all.find do |book|
-      book.goodreads_id == params[:goodreads_id].to_i
+      # book.goodreads_id == params[:goodreads_id].to_i
+      false
     end
     if !result
       # save book object
@@ -36,6 +37,7 @@ class BooksController < ApplicationController
 
       # send success/filaure messages back to ajax request
       if book.save
+
         # TODO add book to shelf
         shelf = params[:book_shelf_name]
         case shelf
@@ -48,6 +50,7 @@ class BooksController < ApplicationController
         end
         Shelf.find_by_slug('all', current_user.id).books << book
 
+        # send message back to user
         response.body = "#{params[:goodreads_id]}-Book successfully saved"
       else
         response.body = "#{params[:goodreads_id]}-Error saving book"
