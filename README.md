@@ -9,7 +9,7 @@ Portfolio project built to demonstrate the implementation of the following techn
  * Sessions and Cookies
  * Restful routes, CRUD & 7 basic REST actions
  * Controllers in Sinatra
- * User authentication in Sinatra using sessions (possibly add 3rd party auth at a later date)
+ * Password authentication using the Bcrypt ruby gem.
  * Rack Flash messages to display information to the user
  * Validate user input
  * RSpec & TDD
