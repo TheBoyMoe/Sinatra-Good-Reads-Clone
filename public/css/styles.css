@@ -138,14 +138,43 @@ a.close {
 }
 
 /* home page */
+.home h1 {
+  font-size: 2.0em;
+  font-weight: 400;
+}
+
+.home h2  {
+  font-size: 1.6em;
+  margin-bottom: 1.2em;
+}
+
 .book-recomendation {
   float: left;
   width: 150px;
+  margin: 0 32px 32px 0;
+  text-align: center;
 }
 
-.book-recomendation h2,
+.book-recomendation:nth-child(4n) {
+  margin-right: 0;
+}
+
+.book-recomendation .ui.image {
+  margin-bottom: 1.0em;
+}
+
+.book-recomendation h3,
 .book-recomendation p {
   margin: 0;
+}
+
+.book-recomendation h3 {
+  font-size: 1.4em;
+  font-weight: 400;
+}
+
+.book-recomendation p {
+  font-size: 1.2em;
 }
 
 .ui.image img {
