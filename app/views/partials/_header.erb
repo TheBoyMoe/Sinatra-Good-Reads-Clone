@@ -1,12 +1,21 @@
 <!-- navbar -->
 <header>
-  <div class="ui secondary pointing menu">
 
-    <!-- <% if logged_in? %>
-      <h1><a class="ui item" href="/users/<%= current_user.slug %>">Simplereads</a></h1>
-    <% else %>
-      <h1><a class="ui item" href="/">Simplereads</a></h1>
-    <% end %> -->
+  <% if path_info != '/login' && path_info != '/signup'   %>
+    <div class="search-form-wrapper">
+      <div class="ui item search-form">
+        <form class="ui form" action="/results" accept-charset="UTF-8" method="post">
+          <div class="ui icon input">
+            <input type="text" name="query" id="query" placeholder="Search by author or title"/>
+            <i class="search icon"></i>
+            <input class="ui button" type="submit" name="search" value="Go">
+          </div>
+        </form>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="ui secondary pointing menu">
 
     <h1><a class="ui item" href="/">Simplereads</a></h1>
 
@@ -29,17 +38,5 @@
     </div>
 
   </div>
-
-    <% if path_info != '/login' && path_info != '/signup'   %>
-      <div class="ui item search-form">
-        <form class="ui form" action="/results" accept-charset="UTF-8" method="post">
-          <div class="ui icon input">
-            <input type="text" name="query" id="query" placeholder="Search by author or title"/>
-            <i class="search icon"></i>
-            <input class="ui button" type="submit" name="search" value="Go">
-          </div>
-        </form>
-      </div>
-    <% end %>
 
 </header>
