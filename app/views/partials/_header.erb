@@ -2,35 +2,44 @@
 <header>
   <div class="ui secondary pointing menu">
 
-      <!-- <% if logged_in? %>
-        <h1><a class="ui item" href="/users/<%= current_user.slug %>">Simplereads</a></h1>
-      <% else %>
-        <h1><a class="ui item" href="/">Simplereads</a></h1>
-      <% end %> -->
-
+    <!-- <% if logged_in? %>
+      <h1><a class="ui item" href="/users/<%= current_user.slug %>">Simplereads</a></h1>
+    <% else %>
       <h1><a class="ui item" href="/">Simplereads</a></h1>
+    <% end %> -->
 
-      <!-- right-hand side menu -->
-      <div class="right menu">
-        <% if path_info != '/login' && path_info != '/signup'   %>
-          <div class="ui item search-form">
-            <form class="ui form" action="/results" accept-charset="UTF-8" method="post">
-              <div class="ui icon input">
-                <input type="text" name="query" id="query" placeholder="Search by author or title"/>
-                <i class="search icon"></i>
-                <input class="ui button" type="submit" name="search" value="Go">
-              </div>
-            </form>
-          </div>
-        <% end %>
-        <% if !logged_in? %>
-          <% if path_info == '/login' %>
-            <a class="ui item" href="/signup">signup</a>
-          <% else %>
-            <a class="ui item" href="/login">login</a>
-          <% end %>
+    <h1><a class="ui item" href="/">Simplereads</a></h1>
+
+    <!-- right-hand side menu -->
+    <div class="right menu">
+      <% if !logged_in? %>
+        <% if path_info == '/login' %>
+          <a class="ui item" href="/signup">signup</a>
         <% else %>
-          <a class="ui item" href="/logout">logout</a>
+          <a class="ui item" href="/login">login</a>
         <% end %>
+      <% else %>
+        <% user = current_user.slug %>
+        <% path = '/users/' + user %>
+        <% if path_info != path %>
+          <a class="ui item" href="/users/<%= current_user.slug %>">myBooks</a>
+        <% end %>
+        <a class="ui item" href="/logout">logout</a>
+      <% end %>
+    </div>
+
+  </div>
+
+    <% if path_info != '/login' && path_info != '/signup'   %>
+      <div class="ui item search-form">
+        <form class="ui form" action="/results" accept-charset="UTF-8" method="post">
+          <div class="ui icon input">
+            <input type="text" name="query" id="query" placeholder="Search by author or title"/>
+            <i class="search icon"></i>
+            <input class="ui button" type="submit" name="search" value="Go">
+          </div>
+        </form>
       </div>
+    <% end %>
+
 </header>

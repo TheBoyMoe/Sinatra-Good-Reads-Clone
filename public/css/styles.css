@@ -2,6 +2,7 @@
 
 body .wrapper,
 .ui.secondary.pointing.menu,
+.ui.item.search-form,
 footer {
   width: 760px;
   margin: 0 auto;
@@ -24,6 +25,7 @@ header {
 /* menu/nav bar */
 .ui.secondary.pointing.menu {
   border-bottom: 0;
+  margin-bottom: 0.4em;
 }
 
 .ui.secondary.pointing.menu .item {
@@ -51,6 +53,10 @@ ul {
 .signup-form .ui.form {
   max-width: 60%;
   margin: 0 auto;
+}
+
+.ui.form {
+  max-width: 100%;
 }
 
 .ui.form .field {
@@ -96,11 +102,17 @@ ul {
 
 
 /* search form */
-
 .ui.item.search-form {
-  padding-right: 3.4em !important;
+  /*padding-right: 3.4em !important;*/
+  border-top: 1px solid;
+  width: 700px;
+  padding: 1.8em 0;
+  border-color: rgba(161,161,161,0.17)
 }
 
+.ui.item.search-form .ui.icon.input {
+  width: 350px;
+}
 .ui.item.search-form .ui.icon.input input[type="submit"] {
   padding-right: 1.0em !important;
   margin-left: 0.2em;
