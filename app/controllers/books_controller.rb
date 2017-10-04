@@ -31,9 +31,10 @@ class BooksController < ApplicationController
         year_published: params[:publication_date],
         ratings_average: params[:average_rating],
         ratings_count: params[:ratings_count],
-        book_shelf_name: params[:book_shelf_name],
         reviews_count: params[:reviews_count]
       )
+
+      # TODO create shelf, add book
 
       # send success/filaure messages back to ajax request
       if book.save

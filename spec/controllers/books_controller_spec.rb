@@ -15,9 +15,7 @@ describe 'BookController' do
       average_rating: 4.19,
       ratings_count: 123456,
       reviews_count: 654123,
-      book_shelf: {
-        name: 'to_read'
-      }
+      book_shelf_name: 'to_read'
     }
 
     it "saves the book to the databse" do

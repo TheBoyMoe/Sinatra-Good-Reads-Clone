@@ -31,7 +31,7 @@
         <% user = current_user.slug %>
         <% path = '/users/' + user %>
         <% if path_info != path %>
-          <a class="ui item" href="/users/<%= current_user.slug %>">myBooks</a>
+          <a class="ui item" href="/shelves/<%= current_user.slug %>">myBooks</a>
         <% end %>
         <a class="ui item" href="/logout">logout</a>
       <% end %>
