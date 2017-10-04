@@ -22,14 +22,14 @@ class UsersController < ApplicationController
       end
       redirect :'/signup'
     else
-      # TODO create default book shelves
+      # create default book shelves
       user.shelves << [
         Shelf.create(title: 'all'),
         Shelf.create(title: 'read'),
         Shelf.create(title: 'to-read'),
         Shelf.create(title: 'reading')
       ]
-      # redirect user to their home page
+      # redirect user to the home page
       session[:user_id] = user.id
       redirect :"/"
     end
