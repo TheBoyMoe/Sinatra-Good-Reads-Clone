@@ -52,14 +52,21 @@ describe 'BookController' do
       expect(Book.all.size).to eq(1)
       expect(Shelf.find_by(title: 'all').books.size).to eq(1)
       expect(Shelf.find_by(title: 'all').books.first.title).to eq('The Martian Chronicles')
+      expect(Shelf.find_by(title: 'to-read').books.size).to eq(1)
       expect(Shelf.find_by(title: 'to-read').books.first.title).to eq('The Martian Chronicles')
     end
 
     it "does not save books already in the user's book shelves" do
-      Book.create(title: 'The Martian Chronicles', author: 'Ray Bradbury', goodreads_id: 123456)
+      post '/books', params
       post '/books', params
 
       expect(Book.all.size).to eq(1)
+      expect(Shelf.find_by(title: 'all').books.size).to eq(1)
+      expect(Shelf.find_by(title: 'to-read').books.size).to eq(1)
+    end
+
+    it "does not save a book already in the database, but will save it to the current user's book shelf" do
+
     end
 
     it "raises an error if the book fails to be saved" do

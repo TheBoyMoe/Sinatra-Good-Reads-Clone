@@ -16,14 +16,19 @@ class BooksController < ApplicationController
     #   "submit"=>"save"
     # }
 
-    # TODO re-write - many users can save the same book
-    result = Book.all.find do |book|
-      # book.goodreads_id == params[:goodreads_id].to_i
-      false
+    # has the user saved the book in the past
+    previous_book = current_user.shelves.find_by(title: 'all').books.find do |b|
+      b.goodreads_id == params[:goodreads_id].to_i
     end
-    if !result
-      # save book object
-      book = Book.new(
+
+    # has the book been saved before
+    book = Book.all.find do |b|
+      b.goodreads_id == params[:goodreads_id].to_i
+    end
+    # binding.pry
+    if !book
+      # create book
+      new_book = Book.new(
         goodreads_id: params[:goodreads_id],
         title: params[:title],
         author: params[:author],
@@ -34,31 +39,40 @@ class BooksController < ApplicationController
         reviews_count: params[:reviews_count]
       )
 
-      if book.save
+      if new_book.save
         # add book to the current user's appropriate shelf
-        shelf = params[:book_shelf_name]
-        case shelf
-        when 'read'
-          Shelf.find_by_slug('read', current_user.id).books << book
-        when 'to-read'
-          Shelf.find_by_slug('to-read', current_user.id).books << book
-        when 'reading'
-          Shelf.find_by_slug('reading', current_user.id).books << book
-        end
-        # add every book to 'all' book shelf
-        Shelf.find_by_slug('all', current_user.id).books << book
+        save_book_to_shelf(params[:book_shelf_name], new_book)
 
         # send message back to user
         response.body = "#{params[:goodreads_id]}-Book successfully saved"
       else
-        puts "NOT SAVING BOOK"
         #halt "#{params[:goodreads_id]}-Error saving book"
         response.body = "#{params[:goodreads_id]}-Error saving book"
       end
-    else
+    elsif book && !previous_book
+      # book has been saved by another user, save it to the current user's book shelf
+      save_book_to_shelf(params[:book_shelf_name], book)
+
+      # send message back to user
+      response.body = "#{params[:goodreads_id]}-Book successfully saved"
+    elsif previous_book
       response.body = "#{params[:goodreads_id]}-You have saved this book previously"
     end
 
   end
+
+  private
+    def save_book_to_shelf(shelf, book)
+      case shelf
+      when 'read'
+        Shelf.find_by_slug('read', current_user.id).books << book
+      when 'to-read'
+        Shelf.find_by_slug('to-read', current_user.id).books << book
+      when 'reading'
+        Shelf.find_by_slug('reading', current_user.id).books << book
+      end
+      # add every book to 'all' book shelf
+      Shelf.find_by_slug('all', current_user.id).books << book
+    end
 
 end
