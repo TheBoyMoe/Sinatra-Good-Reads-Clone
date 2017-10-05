@@ -19,15 +19,15 @@ describe "User login" do
 
   context "POST /login" do
     it "displays the user's home page upon successful login" do
-      User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
+      user = User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
       visit '/login'
       fill_in "username", with: "test user"
       fill_in "password", with: "test1234"
       click_button "Login"
 
-      expect(page.current_path).to eq('/users/test-user')
+      expect(page.current_path).to eq('/')
       expect(page.status_code).to eq(200)
-      expect(page.body).to include("Welcome test user")
+      expect(page.body).to include("Welcome #{user.username}")
     end
 
     # TODO test that a flash message appears

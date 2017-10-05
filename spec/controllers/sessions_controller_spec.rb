@@ -4,11 +4,11 @@ describe 'SessionController' do
 
   describe "/login" do
     context 'logged in' do
-      it "redirects the user to their home page" do
+      it "redirects the user to the home page" do
         user = User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
         get '/login', {}, {'rack.session' => {user_id: user.id}}
 
-        expect(last_response.location).to include("/users/#{user.slug}")
+        expect(last_response.location).to include("/")
       end
     end
 

@@ -20,12 +20,12 @@ describe UsersController do
         expect(last_response.body).to include('Signup')
       end
 
-      it "redirects the user to their home page following user registration" do
+      it "redirects the user to the home page following user registration" do
         params = {username: 'test user', email: 'test@example.com', password: 'test1234'}
         post '/signup', params
 
         expect(last_response.status).to eq(302)
-        expect(last_response.location).to include("/users/test-user")
+        expect(last_response.location).to include("/")
       end
 
       it "does not let a user signup without a username" do

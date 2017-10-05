@@ -76,9 +76,6 @@ describe 'BookController' do
       expect(@user.shelves.find_by(title: 'to-read').books.first.title).to eq('The Martian Chronicles')
     end
 
-    it "raises an error if the book fails to be saved" do
-      # TODO
-    end
   end
 
 end

@@ -12,36 +12,36 @@ describe 'Book search' do
 
   context "Page" do
     it "displays a search field" do
-      expect(page.current_path).to eq('/users/test-user')
+      expect(page.current_path).to eq('/')
       expect(page).to have_selector('form')
       expect(page).to have_field(:query)
     end
   end
 
-  context "search the local database" do
-
-    before do
-      Book.create(title: "2001, A Space Odyssey", author: 'Arthur C Clarke')
-    end
-
-    it "looks for the book based on the title" do
-      fill_in 'query', with: "2001, A Space Odyssey"
-      click_button "Go"
-
-      expect(page.current_path).to eq('/results')
-      expect(page.body).to include("2001, A Space Odyssey")
-      expect(page.body).to include('Arthur C Clarke')
-    end
-
-    it "looks for the book based on the author" do
-      fill_in 'query', with: 'Arthur C Clarke'
-      click_button "Go"
-
-      expect(page.current_path).to eq('/results')
-      expect(page.body).to include("2001, A Space Odyssey")
-      expect(page.body).to include('Arthur C Clarke')
-    end
-  end
+  # context "search the local database" do
+  #
+  #   before do
+  #     Book.create(title: "2001, A Space Odyssey", author: 'Arthur C Clarke')
+  #   end
+  #
+  #   it "looks for the book based on the title" do
+  #     fill_in 'query', with: "2001, A Space Odyssey"
+  #     click_button "Go"
+  #
+  #     expect(page.current_path).to eq('/results')
+  #     expect(page.body).to include("2001, A Space Odyssey")
+  #     expect(page.body).to include('Arthur C Clarke')
+  #   end
+  #
+  #   it "looks for the book based on the author" do
+  #     fill_in 'query', with: 'Arthur C Clarke'
+  #     click_button "Go"
+  #
+  #     expect(page.current_path).to eq('/results')
+  #     expect(page.body).to include("2001, A Space Odyssey")
+  #     expect(page.body).to include('Arthur C Clarke')
+  #   end
+  # end
 
   context "uses the goodreads api" do
 

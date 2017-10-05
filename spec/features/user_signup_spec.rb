@@ -26,7 +26,7 @@ describe "User signup" do
       fill_in "password", with: "test1234"
       click_button "Sign up"
 
-      expect(page.current_path).to eq('/users/test-user')
+      expect(page.current_path).to eq('/')
       expect(page.status_code).to eq(200)
       expect(page.body).to include("Welcome test user")
     end
