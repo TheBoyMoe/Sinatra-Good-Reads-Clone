@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe UsersController do
-
+  # TODO test shelves created on user signup
   describe '/signup' do
 
     context "logged in" do
@@ -38,7 +38,7 @@ describe UsersController do
       it "does not let a user signup without an email address" do
         params = {username: 'test user', password: 'test1234'}
         post '/signup', params
-        
+
         expect(last_response.location).to include('/signup')
       end
 

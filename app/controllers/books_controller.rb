@@ -34,11 +34,8 @@ class BooksController < ApplicationController
         reviews_count: params[:reviews_count]
       )
 
-
-      # send success/filaure messages back to ajax request
       if book.save
-
-        # TODO add book to shelf
+        # add book to the current user's appropriate shelf
         shelf = params[:book_shelf_name]
         case shelf
         when 'read'
@@ -48,11 +45,13 @@ class BooksController < ApplicationController
         when 'reading'
           Shelf.find_by_slug('reading', current_user.id).books << book
         end
+        # add every book to 'all' book shelf
         Shelf.find_by_slug('all', current_user.id).books << book
 
         # send message back to user
         response.body = "#{params[:goodreads_id]}-Book successfully saved"
       else
+        puts "NOT SAVING BOOK"
         #halt "#{params[:goodreads_id]}-Error saving book"
         response.body = "#{params[:goodreads_id]}-Error saving book"
       end

@@ -29,7 +29,8 @@ class UsersController < ApplicationController
         Shelf.create(title: 'to-read'),
         Shelf.create(title: 'reading')
       ]
-      # redirect user to the home page
+
+      # login & redirect user to the home page
       session[:user_id] = user.id
       redirect :"/"
     end
