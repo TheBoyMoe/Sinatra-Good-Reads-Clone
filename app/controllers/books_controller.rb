@@ -25,7 +25,7 @@ class BooksController < ApplicationController
     book = Book.all.find do |b|
       b.goodreads_id == params[:goodreads_id].to_i
     end
-    # binding.pry
+    
     if !book
       # create book
       new_book = Book.new(

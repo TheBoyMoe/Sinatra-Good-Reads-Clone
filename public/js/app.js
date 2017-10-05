@@ -25,7 +25,6 @@ $(document).ready(function(){
         url: $(form).attr('action'),
         data: formData,
         success: function(response){
-          console.log("success: ", response)
           var vals = response.split('-')
           if (vals[0] == goodreads_id) {
             $(".message-" + goodreads_id).show();
