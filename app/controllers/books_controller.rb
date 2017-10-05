@@ -53,6 +53,7 @@ class BooksController < ApplicationController
         # send message back to user
         response.body = "#{params[:goodreads_id]}-Book successfully saved"
       else
+        #halt "#{params[:goodreads_id]}-Error saving book"
         response.body = "#{params[:goodreads_id]}-Error saving book"
       end
     else

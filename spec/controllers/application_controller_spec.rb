@@ -4,11 +4,11 @@ describe 'ApplicationController' do
 
   describe "Homepage: GET '/'" do
     context "logged in" do
-      it "loads the user's home page" do
+      it "loads the home page" do
         user = User.create(username: 'test user', email: 'test@example.com', password: 'test1234')
         get '/', {}, {'rack.session' => {user_id: user.id}}
 
-        expect(last_response.location).to include("/users/#{user.slug}")
+        expect(last_response.body).to include("Welcome #{user.username}")
       end
     end
 

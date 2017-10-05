@@ -29,8 +29,14 @@ describe 'BookController' do
       expect(Book.find(1).year_published).to eq(params[:publication_date])
       expect(Book.find(1).ratings_average).to eq(params[:average_rating])
       expect(Book.find(1).ratings_count).to eq(params[:ratings_count])
-      expect(Book.find(1).book_shelf_name).to eq(params[:book_shelf_name])
       expect(Book.find(1).reviews_count).to eq(params[:reviews_count])
+    end
+
+    it "saves the book to the 'all' and 'to-read' shelves" do
+      post '/books', params
+
+      expect(Shelf.find_by(title: 'all').books.first.title).to eq('The Martian Chronicles')
+      expect(Shelf.find_by(title: 'to-read').books.first.title).to eq('The Martian Chronicles')
     end
 
     it "does not save books already in the databse" do
@@ -38,6 +44,10 @@ describe 'BookController' do
       post '/books', params
 
       expect(Book.all.size).to eq(1)
+    end
+
+    it "raises an error if the book fails to be saved" do
+      # TODO 
     end
   end
 
