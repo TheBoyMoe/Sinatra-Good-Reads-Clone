@@ -28,8 +28,7 @@
           <a class="ui item" href="/login">login</a>
         <% end %>
       <% else %>
-        <% user = current_user.slug %>
-        <% path = '/users/' + user %>
+        <% path = '/shelves/' + current_user.slug %>
         <% if path_info != path %>
           <a class="ui item" href="/shelves/<%= current_user.slug %>">myBooks</a>
         <% end %>
