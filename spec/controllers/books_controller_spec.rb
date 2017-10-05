@@ -7,15 +7,15 @@ describe 'BookController' do
     User.destroy_all
 
     # create user, shelves and log them in
-    user = User.new(username: 'test user', email: 'test@example.com', password: 'test1234')
-    user.shelves << [
+    @user = User.new(username: 'test user', email: 'test@example.com', password: 'test1234')
+    @user.shelves << [
       Shelf.create(title: 'all'),
       Shelf.create(title: 'read'),
       Shelf.create(title: 'to-read'),
       Shelf.create(title: 'reading')
     ]
-    user.save
-    get '/login', {}, {'rack.session' => {user_id: user.id}}
+    @user.save
+    get '/login', {}, {'rack.session' => {user_id: @user.id}}
   end
 
   context "user selects the option to save the book to their 'to-read' book shelf" do
@@ -50,10 +50,10 @@ describe 'BookController' do
       post '/books', params
 
       expect(Book.all.size).to eq(1)
-      expect(Shelf.find_by(title: 'all').books.size).to eq(1)
-      expect(Shelf.find_by(title: 'all').books.first.title).to eq('The Martian Chronicles')
-      expect(Shelf.find_by(title: 'to-read').books.size).to eq(1)
-      expect(Shelf.find_by(title: 'to-read').books.first.title).to eq('The Martian Chronicles')
+      expect(@user.shelves.find_by(title: 'all').books.size).to eq(1)
+      expect(@user.shelves.find_by(title: 'all').books.first.title).to eq('The Martian Chronicles')
+      expect(@user.shelves.find_by(title: 'to-read').books.size).to eq(1)
+      expect(@user.shelves.find_by(title: 'to-read').books.first.title).to eq('The Martian Chronicles')
     end
 
     it "does not save books already in the user's book shelves" do
@@ -61,12 +61,19 @@ describe 'BookController' do
       post '/books', params
 
       expect(Book.all.size).to eq(1)
-      expect(Shelf.find_by(title: 'all').books.size).to eq(1)
-      expect(Shelf.find_by(title: 'to-read').books.size).to eq(1)
+      expect(@user.shelves.find_by(title: 'all').books.size).to eq(1)
+      expect(@user.shelves.find_by(title: 'to-read').books.size).to eq(1)
     end
 
-    it "does not save a book already in the database, but will save it to the current user's book shelf" do
+    it "will save a book to the user's shelf, but not to the database, if it has been saved by another user" do
+      Book.create(goodreads_id: 123456, title: 'The Martian Chronicles', author: 'Ray Bradbury', book_shelf_name: 'to-read')
+      post '/books', params
 
+      expect(Book.all.size).to eq(1)
+      expect(@user.shelves.find_by(title: 'all').books.size).to eq(1)
+      expect(@user.shelves.find_by(title: 'all').books.first.title).to eq('The Martian Chronicles')
+      expect(@user.shelves.find_by(title: 'to-read').books.size).to eq(1)
+      expect(@user.shelves.find_by(title: 'to-read').books.first.title).to eq('The Martian Chronicles')
     end
 
     it "raises an error if the book fails to be saved" do
