@@ -244,6 +244,10 @@ a.close {
   color: #888;
 }
 
+.book-list .item[data-value="all"] {
+  display: none !important;
+}
+
 .ui.default.dropdown:not(.button)>.text,
 .ui.dropdown:not(.button)>.default.text {
     color: rgba(101,101,101,.87);

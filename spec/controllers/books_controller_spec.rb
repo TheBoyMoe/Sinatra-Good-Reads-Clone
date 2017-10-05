@@ -5,7 +5,7 @@ describe 'BookController' do
     Book.destroy_all
   end
 
-  context '/books' do
+  context "user saves a book to their 'to-read' book shelf" do
     params = {
       goodreads_id: 123456,
       title: 'The Martian Chronicles',
@@ -32,7 +32,7 @@ describe 'BookController' do
       expect(Book.find(1).reviews_count).to eq(params[:reviews_count])
     end
 
-    it "saves the book to the 'all' and 'to-read' shelves" do
+    it "saves the book to the 'all' and 'to-read' book shelves" do
       post '/books', params
 
       expect(Shelf.find_by(title: 'all').books.first.title).to eq('The Martian Chronicles')
@@ -47,7 +47,7 @@ describe 'BookController' do
     end
 
     it "raises an error if the book fails to be saved" do
-      # TODO 
+      # TODO
     end
   end
 
