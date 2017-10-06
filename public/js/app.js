@@ -7,6 +7,9 @@ $(document).ready(function(){
   // enable drop down menu
   $('.ui.selection.dropdown').dropdown();
 
+  // enable Tabs
+  $('.tabular.menu .item').tab();
+
   // remove flash message on click
   $('a.close').click(function(e){
     e.preventDefault();
