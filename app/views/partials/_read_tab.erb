@@ -1,0 +1,8 @@
+<ul class="book-shelf read">
+  <% @user.shelves.find_by(title: 'read').books.each do |book| %>
+    <li class="book">
+      <p class="read-title"><%= book.title %></p>
+      <p class="read-author"><%= book.author %></p>
+    </li>
+  <% end %>
+</ul>

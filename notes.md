@@ -17,6 +17,8 @@
 15. [Photo by Annie Spratt on Unsplash](https://unsplash.com/photos/AE1XpXLxXSA)
 16. [Capybara Cheat sheet](https://gist.github.com/zhengjia/428105)
 17. [Semantic-UI Tabs](https://semantic-ui.com/modules/tab.html#/usage)
+18. [Capybara](http://www.rubydoc.info/github/teamcapybara/capybara/master)
+19. [Capybara Git repo](https://github.com/teamcapybara/capybara)
 
 
 ## TODO
