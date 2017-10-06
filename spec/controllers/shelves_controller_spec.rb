@@ -17,7 +17,6 @@ describe 'ShelvesController' do
     ]
     @user.save
     get '/login', {}, {'rack.session' => {user_id: @user.id}}
-    visit "/shelves/#{@user.slug}"
 
     book1 = Book.create(goodreads_id: 17, title: 'The Martian Chronicles', author: 'Ray Bradbury')
     book2 = Book.create(goodreads_id: 18, title: 'The Illustrated Man', author: 'Ray Bradbury')
@@ -46,44 +45,52 @@ describe 'ShelvesController' do
     #   expect(page.status_code).to eq(200)
     # end
 
-    # change -> page.should have_content()
-    #           page.should have_no_content()
     it "displays the books in the 'all' book shelf" do
-      expect(page.body).to include("My Books")
-      expect(page.body).to include('The Martian Chronicles')
-      expect(page.body).to include('The Illustrated Man')
-      expect(page.body).to include('Foundation')
+      visit "/shelves/#{@user.slug}"
+
+      page.has_text?('The Martian Chronicles', {exact: true})
+      page.has_text?('The Illustrated Man', {exact: true})
+      page.has_text?('Foundation', {exact: true})
     end
 
     it "displays the books in the 'read' shelf when clicking on the 'read' link" do
-      # click_link 'Read'
-      expect page have_content('The Martian Chronicles')
-      expect page have_no_content('The Illustrated Man')
-      expect page have_no_content('Foundation')
+      visit "/shelves/#{@user.slug}"
+      find('#read-link').click
+      save_and_open_page
+
+      # expect(page).to have_css('div.read-link')
+      # expect(page).to has_css?('.all-tab', {visible: true})
+      # expect(page).to has_css?('.read-tab', {visible: false})
+
+      # page.find('#all-tab', :visible => true)
+      # page.find('#read-tab', :visible => :hidden)
+
+      page.has_selector?('#all-tab', {visible: true})
+      page.has_selector?('#read-tab', {visible: :hidden})
+
+      # page.find(:xpath, ".//div[]")
     end
 
     it "displays the books in the 'to-read' shelf when clicking on the 'to read' link" do
-      # click_link 'To Read'
-
-      expect(page.body).to include('The Illustrated Man')
-      expect(page.body).not_to include('The Martian Chronicles')
-      expect(page.body).not_to include('Foundation')
+      visit "/shelves/#{@user.slug}"
+      find('#to-read-link').click
+      save_and_open_page
+      # TODO
+      
     end
 
     it "displays the books in the 'reading' shelf when clicking on the 'reading' link" do
-      # click_link 'Reading'
+      visit "/shelves/#{@user.slug}"
+      find('#reading-link').click
+      # TODO
 
-      expect(page.body).to include('Foundation')
-      expect(page.body).not_to include('The Martian Chronicles')
-      expect(page.body).not_to include('The Illustrated Man')
     end
 
     it "displays all the books when the user clicks on the 'all' link" do
-      # click_link 'All'
+      visit "/shelves/#{@user.slug}"
+      find('#all-link').click
+      # TODO
 
-      expect(page.body).to include('The Martian Chronicles')
-      expect(page.body).to include('The Illustrated Man')
-      expect(page.body).to include('Foundation')
     end
   end
 
