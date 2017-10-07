@@ -18,9 +18,9 @@ describe 'ShelvesController' do
     @user.save
     get '/login', {}, {'rack.session' => {user_id: @user.id}}
 
-    book1 = Book.create(goodreads_id: 17, title: 'The Martian Chronicles', author: 'Ray Bradbury')
-    book2 = Book.create(goodreads_id: 18, title: 'The Illustrated Man', author: 'Ray Bradbury')
-    book3 = Book.create(goodreads_id: 19, title: 'Foundation', author: 'Isaac Asimov')
+    book1 = Book.create(goodreads_id: 76778, title: 'The Martian Chronicles', author: 'Ray Bradbury')
+    book2 = Book.create(goodreads_id: 24830, title: 'The Illustrated Man', author: 'Ray Bradbury')
+    book3 = Book.create(goodreads_id: 29579, title: 'Foundation', author: 'Isaac Asimov')
 
     @user.shelves.find_by(title: 'all').books << book1
     @user.shelves.find_by(title: 'all').books << book2
@@ -74,7 +74,6 @@ describe 'ShelvesController' do
     it "displays the books in the 'to-read' shelf when clicking on the 'to read' link" do
       visit "/shelves/#{@user.slug}"
       find('#to-read-link').click
-      save_and_open_page
       # TODO
 
     end
@@ -97,13 +96,17 @@ describe 'ShelvesController' do
 
   context "click on book title link" do
 
-    it "fetches the book description from Goodreads, updates the book instance" do
-
+    it "redirects user to the book show page displaying book details, including description" do
+      visit "/shelves/#{@user.slug}"
+      click_link "The Illustrated Man"
+      follow_redirect!
+    
+      expect(page.current_path).to eq("/books/the-illustrated-man")
+      expect(page.body).to include('The Illustrated Man')
+      expect(page.body).to include('Ray Bradbury')
+      page.has_text? "Description: That The Illustrated Man has remained in print since being published in 1951 is fair testimony to the universal appeal of Ray Bradbury's work."
     end
 
-    it "redirects user to the book show page" do
-
-    end
   end
 
 end

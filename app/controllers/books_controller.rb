@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
 
-  # books#create action
+  # book#create action
   post '/books' do
 
     # {
@@ -25,7 +25,7 @@ class BooksController < ApplicationController
     book = Book.all.find do |b|
       b.goodreads_id == params[:goodreads_id].to_i
     end
-    
+
     if !book
       # create book
       new_book = Book.new(
@@ -58,6 +58,16 @@ class BooksController < ApplicationController
       response.body = "#{params[:goodreads_id]}-You have saved this book previously"
     end
 
+  end
+
+  get '/books/:title_slug' do
+    # fetch book description and update the book
+    goodreads_id = Book.find_by_title_slug(params[:title_slug]).goodreads_id
+    if goodreads_id
+      @book = FetchBookDescription.new(goodreads_id).save_description
+    end
+
+    erb :'/books/show'
   end
 
   private
