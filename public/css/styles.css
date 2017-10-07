@@ -214,6 +214,11 @@ a.close {
   width: 700px;
 }
 
+.book-show .book-info {
+  margin-bottom: 2.0em;
+}
+
+.book-show,
 .book-list .book {
   margin-bottom: 2.0em;
   padding-bottom: 2.0em;
@@ -221,27 +226,39 @@ a.close {
   border-color: rgba(181,181,181,0.40);
 }
 
+.book-show .book-image,
 .book-list .book-image {
   margin-right: 1.2em;
 }
 
+.book-show .book-info p,
 .book-list .book-info p {
   margin-bottom: 0;
 }
 
 .book-list .book-info p.book-title {
-  font-weight: 400;
   max-width: 410px;
 }
 
+.book-show .book-info p.book-title,
+.book-list .book-info p.book-title {
+  font-weight: 400;
+}
+
+.book-show .book-info p.book-author,
 .book-list .book-info p.book-author {
   font-size: 1.2em;
   margin-bottom: 0.8em;
 }
 
+.book-show .book-info p.book-rating,
 .book-list .book-info p.book-rating {
   font-size: 1.0em;
   color: #888;
+}
+
+.book-show .book-description {
+  font-size: 1.2em;
 }
 
 .book-list .item[data-value="all"] {
@@ -262,6 +279,14 @@ a.close {
 .ui.tabular.menu .item {
   cursor: pointer;
 }
+
+/* book show page */
+.book-show .ui.small.image {
+  width: 150px;
+}
+
+
+
 
 /* Typography */
 body,

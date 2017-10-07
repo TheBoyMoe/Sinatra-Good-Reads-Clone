@@ -1,5 +1,5 @@
 <div class="main wrapper">
-  <div class="book">
+  <div class="book book-show">
     <div class="book-image left">
       <img class="ui small image" src="<%= @book.image_url %>" alt="Book cover image">
     </div>
@@ -12,7 +12,7 @@
         <span class="book-publication-date"> &dash; published <%= @book.year_published %></span>
       </p>
     </div>
-    <div class="book-description"><%= @book.description %>></div>
+    <div class="book-description">Description: <%= @book.description %>></div>
   </div>
   <!-- book details plus any reviews and comments -->
 </div>
