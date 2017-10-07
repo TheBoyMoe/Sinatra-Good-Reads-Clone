@@ -95,6 +95,15 @@ describe 'ShelvesController' do
 
   end
 
-  
+  context "click on book title link" do
+
+    it "fetches the book description from Goodreads, updates the book instance" do
+
+    end
+
+    it "redirects user to the book show page" do
+
+    end
+  end
 
 end
