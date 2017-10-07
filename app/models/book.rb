@@ -4,7 +4,7 @@ class Book < ActiveRecord::Base
   has_many :shelves, through: :book_shelves
 
   def title_slug
-    title.downcase.gsub(/[,()#{}:]/, '').gsub(' ', '-')
+    title.downcase.gsub(/[,'(){}:]/, '').gsub('#', '').gsub(' ', '-')
   end
 
   def self.find_by_title_slug(slug)
