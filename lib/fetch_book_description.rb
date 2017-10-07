@@ -56,15 +56,24 @@ class FetchBookDescription
   end
 
   def fetch_data
-
+    base_url = "https://www.goodreads.com/book/show/"
+    url = "#{base_url}#{@id}.xml?key=#{ENV['GOODREADS_API_KEY']}"
+    Nokogiri::XML(open(url))
   end
 
   def parse_xml
     # return string of book description
+    doc = fetch_data
+    doc.search('book description').text
   end
 
   def save_description
     # update Book instance
+    if book = Book.find_by(goodreads_id: @id)
+      book.description = parse_xml
+      book.save
+    end
+    book
   end
 
 end
