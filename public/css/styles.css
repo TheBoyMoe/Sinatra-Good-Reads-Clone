@@ -140,7 +140,7 @@ ul {
   text-align: center;
 }
 
-.book-wrap .flash-message-wrapper {
+.book .flash-message-wrapper {
   text-align: left;
   display: none;
 }
@@ -214,7 +214,7 @@ a.close {
   width: 700px;
 }
 
-.book-list .book-wrap {
+.book-list .book {
   margin-bottom: 2.0em;
   padding-bottom: 2.0em;
   border-bottom: 1px solid;
@@ -222,7 +222,7 @@ a.close {
 }
 
 .book-list .book-image {
-  margin-right: 0.8em;
+  margin-right: 1.2em;
 }
 
 .book-list .book-info p {
@@ -254,14 +254,14 @@ a.close {
 }
 
 /* book shelves */
-.book-shelf li {
-    margin-bottom: 2.0em;
+
+.ui.tabular.menu {
+  margin-bottom: 3.0em;
 }
 
-.book-shelf p {
-  margin-bottom: 0;
+.ui.tabular.menu .item {
+  cursor: pointer;
 }
-
 
 /* Typography */
 body,

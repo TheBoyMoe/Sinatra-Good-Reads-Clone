@@ -5,7 +5,7 @@
     <% else %>
       <ul class="book-list">
         <% @books.each.with_index(1) do |book, i| %>
-          <li class="book-wrap clearfix">
+          <li class="book clearfix">
 
             <div class="flash-message-wrapper message-<%= book[:goodreads_id] %>">
               <span class="flash-message"></span>
