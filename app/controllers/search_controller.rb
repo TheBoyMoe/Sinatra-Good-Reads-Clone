@@ -5,7 +5,7 @@ class SearchController < ApplicationController
     query = params[:query]
     @books = find_by_api(query)
     if @books.size > 0
-      erb :'books/index'
+      erb :'results/index'
     else
       not_found
     end
@@ -26,7 +26,7 @@ class SearchController < ApplicationController
     # else
     #   not_found
     # end
-    
+
   end
 
   private

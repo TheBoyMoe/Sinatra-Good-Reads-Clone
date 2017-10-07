@@ -16,7 +16,7 @@ $(document).ready(function(){
     $(this).parent().hide();
   })
 
-  var forms = document.querySelectorAll('li.book-wrap form');
+  var forms = document.querySelectorAll('li.book form');
   forms.forEach(function(form, i){
     $(form).submit(function(e){
       e.preventDefault();
@@ -31,12 +31,11 @@ $(document).ready(function(){
           var vals = response.split('-')
           if (vals[0] == goodreads_id) {
             $(".message-" + goodreads_id).show();
-            $(".flash-message").html(vals[1])
+            $(".flash-message").html(vals[1]);
           }
         },
         error: function(response){
-          console.log("failure: ", response)
-          // ??
+          console.log("failure: ", response);
         }
       });
     });

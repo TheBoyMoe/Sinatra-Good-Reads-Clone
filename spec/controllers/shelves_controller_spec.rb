@@ -56,7 +56,7 @@ describe 'ShelvesController' do
     it "displays the books in the 'read' shelf when clicking on the 'read' link" do
       visit "/shelves/#{@user.slug}"
       find('#read-link').click
-      save_and_open_page
+      # save_and_open_page
 
       # expect(page).to have_css('div.read-link')
       # expect(page).to has_css?('.all-tab', {visible: true})
@@ -76,7 +76,7 @@ describe 'ShelvesController' do
       find('#to-read-link').click
       save_and_open_page
       # TODO
-      
+
     end
 
     it "displays the books in the 'reading' shelf when clicking on the 'reading' link" do
@@ -92,6 +92,9 @@ describe 'ShelvesController' do
       # TODO
 
     end
+
   end
+
+  
 
 end
