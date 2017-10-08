@@ -204,6 +204,7 @@ a.close {
 
 .ui.small.image {
   width: 65px;
+  margin-top: 0.3em;
 }
 
 .ui.selection.dropdown {

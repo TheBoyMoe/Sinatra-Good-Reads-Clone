@@ -68,9 +68,9 @@ class BooksController < ApplicationController
   # book#show action
   get '/books/:title_slug' do
     # fetch book description and update the book
-    goodreads_id = Book.find_by_title_slug(params[:title_slug]).goodreads_id
-    if goodreads_id
-      @book = FetchBookDescription.new(goodreads_id).save_description
+    @book = Book.find_by_title_slug(params[:title_slug])
+    if @book && !@book.description
+      @book = FetchBookDescription.new(@book.goodreads_id).save_description
     end
 
     erb :'/books/show'
@@ -86,8 +86,6 @@ class BooksController < ApplicationController
       else
         Shelf.find_by_slug('read', current_user.id).books << book
       end
-      # add every book to 'all' book shelf
-      # Shelf.find_by_slug('all', current_user.id).books << book
     end
 
 end
