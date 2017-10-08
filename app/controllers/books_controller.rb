@@ -60,6 +60,7 @@ class BooksController < ApplicationController
 
   end
 
+  # book#show action
   get '/books/:title_slug' do
     # fetch book description and update the book
     goodreads_id = Book.find_by_title_slug(params[:title_slug]).goodreads_id
