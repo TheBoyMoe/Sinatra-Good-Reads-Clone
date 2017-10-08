@@ -9,7 +9,7 @@ describe 'BookController' do
     # create user, shelves and log them in
     @user = User.new(username: 'test user', email: 'test@example.com', password: 'test1234')
     @user.shelves << [
-      Shelf.create(title: 'all'),
+      # Shelf.create(title: 'all'),
       Shelf.create(title: 'read'),
       Shelf.create(title: 'to-read'),
       Shelf.create(title: 'reading')
@@ -46,12 +46,12 @@ describe 'BookController' do
       expect(Book.find(1).reviews_count).to eq(params[:reviews_count])
     end
 
-    it "saves the book to the 'all' and 'to-read' book shelves" do
+    it "saves the book to the 'to-read' book shelf" do
       post '/books', params
 
       expect(Book.all.size).to eq(1)
-      expect(@user.shelves.find_by(title: 'all').books.size).to eq(1)
-      expect(@user.shelves.find_by(title: 'all').books.first.title).to eq('The Martian Chronicles')
+      # expect(@user.shelves.find_by(title: 'all').books.size).to eq(1)
+      # expect(@user.shelves.find_by(title: 'all').books.first.title).to eq('The Martian Chronicles')
       expect(@user.shelves.find_by(title: 'to-read').books.size).to eq(1)
       expect(@user.shelves.find_by(title: 'to-read').books.first.title).to eq('The Martian Chronicles')
     end
@@ -61,7 +61,7 @@ describe 'BookController' do
       post '/books', params
 
       expect(Book.all.size).to eq(1)
-      expect(@user.shelves.find_by(title: 'all').books.size).to eq(1)
+      # expect(@user.shelves.find_by(title: 'all').books.size).to eq(1)
       expect(@user.shelves.find_by(title: 'to-read').books.size).to eq(1)
     end
 
@@ -70,8 +70,8 @@ describe 'BookController' do
       post '/books', params
 
       expect(Book.all.size).to eq(1)
-      expect(@user.shelves.find_by(title: 'all').books.size).to eq(1)
-      expect(@user.shelves.find_by(title: 'all').books.first.title).to eq('The Martian Chronicles')
+      # expect(@user.shelves.find_by(title: 'all').books.size).to eq(1)
+      # expect(@user.shelves.find_by(title: 'all').books.first.title).to eq('The Martian Chronicles')
       expect(@user.shelves.find_by(title: 'to-read').books.size).to eq(1)
       expect(@user.shelves.find_by(title: 'to-read').books.first.title).to eq('The Martian Chronicles')
     end

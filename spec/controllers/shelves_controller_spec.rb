@@ -10,7 +10,7 @@ describe 'ShelvesController' do
     # create user, shelves and log them in
     @user = User.new(username: 'test user', email: 'test@example.com', password: 'test1234')
     @user.shelves << [
-      Shelf.create(title: 'all'),
+      # Shelf.create(title: 'all'),
       Shelf.create(title: 'read'),
       Shelf.create(title: 'to-read'),
       Shelf.create(title: 'reading')
@@ -22,9 +22,9 @@ describe 'ShelvesController' do
     book2 = Book.create(goodreads_id: 24830, title: 'The Illustrated Man', author: 'Ray Bradbury')
     book3 = Book.create(goodreads_id: 29579, title: 'Foundation', author: 'Isaac Asimov')
 
-    @user.shelves.find_by(title: 'all').books << book1
-    @user.shelves.find_by(title: 'all').books << book2
-    @user.shelves.find_by(title: 'all').books << book3
+    # @user.shelves.find_by(title: 'all').books << book1
+    # @user.shelves.find_by(title: 'all').books << book2
+    # @user.shelves.find_by(title: 'all').books << book3
     @user.shelves.find_by(title: 'read').books << book1
     @user.shelves.find_by(title: 'to-read').books << book2
     @user.shelves.find_by(title: 'reading').books << book3
@@ -46,9 +46,10 @@ describe 'ShelvesController' do
     #   expect(page.status_code).to eq(200)
     # end
 
-    it "displays the books in the 'all' book shelf" do
+    it "displays 'all' the user's books by default" do
       visit "/shelves/#{@user.slug}"
-
+      save_and_open_page
+      
       page.has_text?('The Martian Chronicles', {exact: true})
       page.has_text?('The Illustrated Man', {exact: true})
       page.has_text?('Foundation', {exact: true})
@@ -90,7 +91,6 @@ describe 'ShelvesController' do
       visit "/shelves/#{@user.slug}"
       find('#all-link').click
       # TODO
-
     end
 
   end
@@ -99,6 +99,7 @@ describe 'ShelvesController' do
 
     it "redirects user to the book show page displaying book details, including description" do
       visit "/shelves/#{@user.slug}"
+      save_and_open_page
       click_link "The Illustrated Man"
       follow_redirect!
 

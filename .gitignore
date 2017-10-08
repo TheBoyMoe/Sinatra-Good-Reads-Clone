@@ -3,3 +3,4 @@
 /coverage
 /config/local_env.rb
 /spec/fixtures/vcr_cassettes/*.yml
+*.html

@@ -17,7 +17,12 @@ class BooksController < ApplicationController
     # }
 
     # has the user saved the book in the past
-    previous_book = current_user.shelves.find_by(title: 'all').books.find do |b|
+    users_books = []
+    current_user.shelves.each do |shelf|
+      shelf.books.each {|book| users_books << book}
+    end
+
+    previous_book = users_books.find do |b|
       b.goodreads_id == params[:goodreads_id].to_i
     end
 
@@ -74,15 +79,15 @@ class BooksController < ApplicationController
   private
     def save_book_to_shelf(shelf, book)
       case shelf
-      when 'read'
-        Shelf.find_by_slug('read', current_user.id).books << book
       when 'to-read'
         Shelf.find_by_slug('to-read', current_user.id).books << book
       when 'reading'
         Shelf.find_by_slug('reading', current_user.id).books << book
+      else
+        Shelf.find_by_slug('read', current_user.id).books << book
       end
       # add every book to 'all' book shelf
-      Shelf.find_by_slug('all', current_user.id).books << book
+      # Shelf.find_by_slug('all', current_user.id).books << book
     end
 
 end

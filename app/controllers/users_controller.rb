@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     else
       # create default book shelves
       user.shelves << [
-        Shelf.create(title: 'all'),
+        # Shelf.create(title: 'all'),
         Shelf.create(title: 'read'),
         Shelf.create(title: 'to-read'),
         Shelf.create(title: 'reading')

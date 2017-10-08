@@ -2,15 +2,13 @@
 <div class="main wrapper">
   <h1>My Books</h1>
 
-  <% all_shelf = @user.shelves.find_by(title: 'all') %>
-  <% if all_shelf && all_shelf.books.size > 0 %>
-
-    <div class="ui tabular menu">
-      <div id="all-link" class="item all-link active" data-tab="tab-name-all">All</div>
-      <div id="read-link" class="item read-link" data-tab="tab-name-read">Read</div>
-      <div id="reading-link" class="item reading-link" data-tab="tab-name-reading">Reading</div>
-      <div id="to-read-link" class="item to-read-link" data-tab="tab-name-to-read">To read</div>
-    </div>
+  <div class="ui tabular menu">
+    <div id="all-link" class="item all-link active" data-tab="tab-name-all">All</div>
+    <div id="read-link" class="item read-link" data-tab="tab-name-read">Read</div>
+    <div id="reading-link" class="item reading-link" data-tab="tab-name-reading">Reading</div>
+    <div id="to-read-link" class="item to-read-link" data-tab="tab-name-to-read">To read</div>
+  </div>
+  <% if @user.books.size > 0 %>
     <div id="all-tab" class="ui tab all-tab active" data-tab="tab-name-all">
       <%= erb :'/partials/_all_tab' %>
     </div>
