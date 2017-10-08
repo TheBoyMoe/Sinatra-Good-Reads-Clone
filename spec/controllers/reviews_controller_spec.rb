@@ -2,12 +2,20 @@ require 'spec_helper'
 
 describe 'ReviewsController' do
 
-  describe "/reviews" do
+  xdescribe "get /reviews" do
 
   end
 
-  describe "/reviews/:id/edit" do
+  xdescribe "post /reviews" do
 
   end
-  
+
+  xdescribe "get /reviews/:id/edit" do
+
+  end
+
+  xdescribe "post /reviews/:id/edit" do
+    
+  end
+
 end
