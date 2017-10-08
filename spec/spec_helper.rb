@@ -7,6 +7,7 @@ require_relative '../config/environment'
 require 'rack/test'
 require 'capybara/rspec'
 require 'capybara/dsl'
+require 'vcr'
 
 
 if ActiveRecord::Migrator.needs_migration?
@@ -14,6 +15,13 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 ActiveRecord::Base.logger = nil
+
+# vcr config
+VCR.configure do |config|
+  config.ignore_localhost = true
+  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+  config.hook_into :webmock # or :fakeweb
+end
 
 RSpec.configure do |config|
   config.run_all_when_everything_filtered = true

@@ -13,7 +13,6 @@ gem 'thin'
 gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
-gem "tux"
 gem 'sinatra-flash'
 gem 'sinatra-redirect-with-flash'
 gem 'nokogiri'
@@ -21,7 +20,10 @@ gem 'nokogiri'
 group :test do
   gem 'rspec'
   gem 'capybara'
+  gem "tux"
   gem 'rack-test'
   gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'
   gem 'simplecov'
+  gem 'vcr'
+  gem 'webmock'
 end
