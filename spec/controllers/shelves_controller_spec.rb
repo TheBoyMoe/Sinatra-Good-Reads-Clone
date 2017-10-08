@@ -10,7 +10,6 @@ describe 'ShelvesController' do
     # create user, shelves and log them in
     @user = User.new(username: 'test user', email: 'test@example.com', password: 'test1234')
     @user.shelves << [
-      # Shelf.create(title: 'all'),
       Shelf.create(title: 'read'),
       Shelf.create(title: 'to-read'),
       Shelf.create(title: 'reading')
@@ -22,9 +21,6 @@ describe 'ShelvesController' do
     book2 = Book.create(goodreads_id: 24830, title: 'The Illustrated Man', author: 'Ray Bradbury')
     book3 = Book.create(goodreads_id: 29579, title: 'Foundation', author: 'Isaac Asimov')
 
-    # @user.shelves.find_by(title: 'all').books << book1
-    # @user.shelves.find_by(title: 'all').books << book2
-    # @user.shelves.find_by(title: 'all').books << book3
     @user.shelves.find_by(title: 'read').books << book1
     @user.shelves.find_by(title: 'to-read').books << book2
     @user.shelves.find_by(title: 'reading').books << book3
