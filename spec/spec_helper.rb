@@ -41,8 +41,14 @@ RSpec.configure do |config|
   config.order = 'default'
 end
 
+
 def app
   Rack::Builder.parse_file('config.ru').first
 end
 
 Capybara.app = app
+
+# make session available from specs
+def session
+  last_request.env['rack.session']
+end

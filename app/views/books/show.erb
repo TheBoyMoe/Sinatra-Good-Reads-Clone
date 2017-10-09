@@ -17,11 +17,26 @@
 
   <div class="review-list">
     <h2>Reviews</h2>
-    <!-- add review button - if no review  -->
+    <%
+      book_reviews = @book.reviews
+      # binding.pry
+      current_review = book_reviews.find do |review|
+        review.user.id == @user.id
+      end
+    %>
+    <% if current_review %>
+      <h3>
+        <%= @user.username %>&nbsp;
+        <% if current_review.rating && current_review.rating > 0 %>
+          <span class="book-user-rating">rating: <%= current_review.rating %></span>
+        <% end %>
+      </h3>
+      <p><%= current_review.content %></p>
+      <a class="ui button right" href="/reviews/<%= current_review.id %>/edit" >Edit review</a>
+    <% else %>
+      <h3>Add review form to follow</h3>
+    <% end %>
 
-    <!-- otherwise add edit review button -->
-
-    <!-- display the user's review first -->
   </div>
 
 </div>

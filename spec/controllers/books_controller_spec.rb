@@ -9,7 +9,6 @@ describe 'BookController' do
     # create user, shelves and log them in
     @user = User.new(username: 'test user', email: 'test@example.com', password: 'test1234')
     @user.shelves << [
-      # Shelf.create(title: 'all'),
       Shelf.create(title: 'read'),
       Shelf.create(title: 'to-read'),
       Shelf.create(title: 'reading')
@@ -50,8 +49,6 @@ describe 'BookController' do
       post '/books', params
 
       expect(Book.all.size).to eq(1)
-      # expect(@user.shelves.find_by(title: 'all').books.size).to eq(1)
-      # expect(@user.shelves.find_by(title: 'all').books.first.title).to eq('The Martian Chronicles')
       expect(@user.shelves.find_by(title: 'to-read').books.size).to eq(1)
       expect(@user.shelves.find_by(title: 'to-read').books.first.title).to eq('The Martian Chronicles')
     end
@@ -61,7 +58,6 @@ describe 'BookController' do
       post '/books', params
 
       expect(Book.all.size).to eq(1)
-      # expect(@user.shelves.find_by(title: 'all').books.size).to eq(1)
       expect(@user.shelves.find_by(title: 'to-read').books.size).to eq(1)
     end
 
@@ -70,8 +66,6 @@ describe 'BookController' do
       post '/books', params
 
       expect(Book.all.size).to eq(1)
-      # expect(@user.shelves.find_by(title: 'all').books.size).to eq(1)
-      # expect(@user.shelves.find_by(title: 'all').books.first.title).to eq('The Martian Chronicles')
       expect(@user.shelves.find_by(title: 'to-read').books.size).to eq(1)
       expect(@user.shelves.find_by(title: 'to-read').books.first.title).to eq('The Martian Chronicles')
     end

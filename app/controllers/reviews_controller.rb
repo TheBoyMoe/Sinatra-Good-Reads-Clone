@@ -1,8 +1,5 @@
 class ReviewsController < ApplicationController
 
-  # reviews#new action - display input form
-
-
   # reviews#create action - create instance and save to the database
 
 
@@ -12,5 +9,5 @@ class ReviewsController < ApplicationController
   # reviews#update action - update the instance
 
 
-  
+
 end

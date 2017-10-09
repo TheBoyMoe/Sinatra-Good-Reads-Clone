@@ -66,7 +66,8 @@ class BooksController < ApplicationController
   end
 
   # book#show action
-  get '/books/:title_slug' do
+  get '/books/:user_slug/:title_slug' do
+    @user = User.find_by_slug(params[:user_slug])
     # fetch book description and update the book
     @book = Book.find_by_title_slug(params[:title_slug])
     if @book && !@book.description

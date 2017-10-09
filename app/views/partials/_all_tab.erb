@@ -7,7 +7,7 @@
           <img class="ui small image" src="<%= book.image_url %>" alt="Book cover image">
         </div>
         <div class="book-info left">
-          <p class="book-title"><a href="/books/<%= book.title_slug %>"><%= book.title %></a></p>
+          <p class="book-title"><a href="/books/<%= @user.slug %>/<%= book.title_slug %>"><%= book.title %></a></p>
           <p class="book-author">by <%= book.author %></p>
           <p class="book-rating">
             <span class="book-rating-avg"><%= book.ratings_average %> avg rating by</span>

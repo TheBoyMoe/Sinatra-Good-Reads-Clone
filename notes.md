@@ -19,7 +19,8 @@
 17. [Semantic-UI Tabs](https://semantic-ui.com/modules/tab.html#/usage)
 18. [Capybara](http://www.rubydoc.info/github/teamcapybara/capybara/master)
 19. [Capybara Git repo](https://github.com/teamcapybara/capybara)
-
+20. [Rack sessions](http://blog.ianmiller.nyc/2014/09/29/working-with-rack-sessions/)
+21. [Rack Sessions](https://stackoverflow.com/questions/4402808/how-to-test-sinatra-app-using-session)
 
 ## TODO
 1. ~~check book exists in the dbase prior to saving~~

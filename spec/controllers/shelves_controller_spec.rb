@@ -96,14 +96,14 @@ describe 'ShelvesController' do
 
     it "redirects user to the book show page displaying book details, including description" do
       visit "/shelves/#{@user.slug}"
-      save_and_open_page
+      # save_and_open_page
       click_link "The Illustrated Man"
       follow_redirect!
 
       expect(page.current_path).to eq("/books/the-illustrated-man")
       expect(page.body).to include('The Illustrated Man')
       expect(page.body).to include('Ray Bradbury')
-      page.has_text? "Description: That The Illustrated Man has remained in print since being published in 1951 is fair testimony to the universal appeal of Ray Bradbury's work."
+      page.has_text? "That The Illustrated Man has remained in print since being published in 1951 is fair testimony to the universal appeal of Ray Bradbury's work."
     end
 
   end

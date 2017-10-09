@@ -5,7 +5,7 @@ class ApplicationController < Sinatra::Base
   configure do
 
     # enable session and flash messages
-    enable :sessions
+    enable :sessions unless test?
     register Sinatra::Flash
     set :session_secret, "simple_reads_secret"
 
