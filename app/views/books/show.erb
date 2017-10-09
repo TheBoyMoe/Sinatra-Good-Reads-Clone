@@ -34,9 +34,20 @@
       <p><%= current_review.content %></p>
       <a class="ui button right" href="/reviews/<%= current_review.id %>/edit" >Edit review</a>
     <% else %>
-      <h3>Add review form to follow</h3>
-    <% end %>
+      <h3>Add a review</h3>
+      <form class="ui form review-form" action="/reviews" method="post">
 
+        <div class="review-field">
+          <textarea id="review" name="review" rows="8" cols="80"></textarea>
+        </div>
+
+        <div class="field submit">
+          <input class="ui button" type="submit" value="Submit">
+        </div>
+
+      </form>
+    <% end %>
+    <%# TODO: user reviews %>
   </div>
 
 </div>

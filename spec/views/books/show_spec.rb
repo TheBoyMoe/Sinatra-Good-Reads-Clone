@@ -17,7 +17,10 @@ describe 'Book view' do
   end
 
   it "displays a form allowing the user to add a review if they have not already" do
+    visit "/books/#{@user.slug}/#{@book.title_slug}"
 
+    expect(page).to have_field(:review)
+    find_button('Submit').click
   end
 
   it "displays the submitted review" do
@@ -32,9 +35,6 @@ describe 'Book view' do
     @book.reviews << review
     @user.reviews << review
     visit "/books/#{@user.slug}/#{@book.title_slug}"
-
-    # binding.pry
-    save_and_open_page
 
     expect(Book.find_by_title_slug(@book.title_slug).reviews.size).to eq(1)
     find_link('Edit review').visible?
