@@ -13,7 +13,7 @@ class ReviewsController < ApplicationController
       user.reviews << review
       book.reviews << review
 
-      response.body = "#{params[:review]}"
+      response.body = "#{params[:review]} / #{user.slug} / #{review.id}"
     end
   end
 

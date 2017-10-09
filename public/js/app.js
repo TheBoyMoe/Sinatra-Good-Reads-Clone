@@ -44,17 +44,24 @@ $(document).ready(function(){
   });
 
   // handle posting a book review to the review's controller
-  var review-form = document.getElementById('review-form')
-  $(review-form).submit(function(e){
+  var reviewForm = document.querySelector('#review-form');
+  $(reviewForm).submit(function(e){
     e.preventDefault();
-    var formData = $(review-form).serialize();
+    var formData = $(reviewForm).serialize();
     $.ajax({
       type: 'POST',
-      url: $(review-form).attr('action'),
+      url: $(reviewForm).attr('action'),
       data: formData,
       success: function(response){
-        // $('.book-review').html(response);
-        console.log("Success: ", response);
+        var values = response.split(' / ');
+        var review = values[0];
+        var username = values[1];
+        var review_url = values[2];
+        html =
+        '<div id="review-contaier"><h3>' + username + '</h3><p class="book-review">' + review + '</p><a class="ui button right" href="/reviews/' + review_url + '/edit" >Edit review</a></div>'
+
+        $('#review-form-container').after(html);
+        $('#review-form-container').remove();
       },
       error: function(response){
         console.log("Error submitting book review", response);

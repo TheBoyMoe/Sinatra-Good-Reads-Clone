@@ -10,11 +10,11 @@ describe 'ReviewsController' do
   describe "post /reviews/:user_slug/:title_slug/" do
     it "allows the user to add a review to the book being viewd" do
       visit "/books/#{@user.slug}/#{@book.title_slug}"
-      fill_in(:review, with: 'Loved the book, better than the forst. 5 stars!')
+      fill_in(:review, with: 'Loved the book, better than the first. 5 stars')
       find_button('Add review').click
 
       expect(Review.all.size).to eq(1)
-      expect(Review.find(1).content).to eq('Loved the book, better than the forst. 5 stars!')
+      expect(Review.find(1).content).to eq('Loved the book, better than the first. 5 stars')
     end
 
   end

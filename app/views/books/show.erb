@@ -1,7 +1,11 @@
 <div class="main wrapper">
   <div class="book book-show clearfix">
     <div class="book-image left">
-      <img class="ui small image" src="<%= @book.image_url %>" alt="Book cover image">
+      <% if @book.image_url %>
+        <img class="ui small image" src="<%= @book.image_url %>" alt="Book cover image">
+      <% else %>
+        <img class="ui small image" src="/public.imgs/no-image.png" alt="Book cover placeholder image">
+      <% end %>
     </div>
     <div class="book-info">
       <p class="book-title"><%= @book.title %></a></p>
@@ -24,29 +28,31 @@
         review.user.id == @user.id
       end
     %>
-    <% if current_review %>
-      <h3>
-        <%= @user.username %>&nbsp;
-        <% if current_review.rating && current_review.rating > 0 %>
+    <div id="review-form-container">
+      <% if current_review %>
+        <h3>
+          <%= @user.username %>&nbsp;
+          <% if current_review.rating && current_review.rating > 0 %>
           <span class="book-user-rating">rating: <%= current_review.rating %></span>
-        <% end %>
-      </h3>
-      <p class="book-review"><%= current_review.content %></p>
-      <a class="ui button right" href="/reviews/<%= current_review.id %>/edit" >Edit review</a>
-    <% else %>
-      <h3>Add a review</h3>
-      <form id="review-form" class="ui form review-form" action="/reviews/<%= @user.slug %>/<%= @book.title_slug %>" method="post">
+          <% end %>
+        </h3>
+        <p class="book-review"><%= current_review.content %></p>
+        <a class="ui button right" href="/reviews/<%= current_review.id %>/edit" >Edit review</a>
+      <% else %>
+        <h3>Add a review</h3>
+        <form id="review-form" class="ui form review-form" action="/reviews/<%= @user.slug %>/<%= @book.title_slug %>" method="post">
 
-        <div class="review-field">
-          <textarea id="review" name="review" rows="8" cols="80" required></textarea>
-        </div>
+          <div class="review-field">
+            <textarea id="review" name="review" rows="8" cols="80" required></textarea>
+          </div>
 
-        <div class="field submit">
-          <input class="ui button" type="submit" value="Add review">
-        </div>
+          <div class="field submit">
+            <input class="ui button" type="submit" name="submit" value="Add review">
+          </div>
 
-      </form>
-    <% end %>
+        </form>
+      <% end %>
+    </div>
     <%# TODO: user reviews %>
   </div>
 

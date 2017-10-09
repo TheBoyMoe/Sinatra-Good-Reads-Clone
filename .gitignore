@@ -1,5 +1,6 @@
 /db/*.sqlite
 /db/*.db
+/db/test.sqlite-journal
 /coverage
 /config/local_env.rb
 /spec/fixtures/vcr_cassettes/*.yml
