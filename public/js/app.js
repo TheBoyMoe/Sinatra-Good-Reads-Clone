@@ -16,6 +16,7 @@ $(document).ready(function(){
     $(this).parent().hide();
   })
 
+  // handle saving books to the appropriate book shelf
   var forms = document.querySelectorAll('li.book form');
   forms.forEach(function(form, i){
     $(form).submit(function(e){
@@ -41,5 +42,23 @@ $(document).ready(function(){
     });
 
   });
+
+  // handle posting a book review to the review's controller
+  var review-form = document.getElementById('review-form')
+  $(review-form).submit(function(e){
+    e.preventDefault();
+    var formData = $(review-form).serialize();
+    $.ajax({
+      type: 'POST',
+      url: $(review-form).attr('action'),
+      data: formData,
+      success: function(response){
+        $('.book-review').html(response);
+      },
+      error: function(response){
+        console.log("Error submitting book review", response);
+      }
+    });
+  })
 
 });
