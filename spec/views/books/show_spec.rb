@@ -20,15 +20,21 @@ describe 'Book view' do
     visit "/books/#{@user.slug}/#{@book.title_slug}"
 
     expect(page).to have_field(:review)
-    find_button('Submit').click
+    find_button('Add review')
   end
 
-  it "displays the submitted review" do
+  it "updates page, displaying the submitted review, and 'Edit review' link, after a review is submitted" do
+    visit "/books/#{@user.slug}/#{@book.title_slug}"
+    fill_in(:review, with: 'Loved the book, better than the forst. 5 stars!')
+    find_button('Add review').click
 
+    # check review displayed
+    expect(page.body).to include('Loved the book, better than the forst. 5 stars!')
+    find_link('Edit review').visible?
   end
 
-  it "displays an 'Edit review' link if the user added a review" do
-    review = Review.create(content: 'Really enjoyed the book, better than the last. 5 stars!', rating: 5)
+  it "displays a review and an 'Edit review' link if the user added a review in the past" do
+    review = Review.create(content: 'Really enjoyed the book, better than the last. 5 stars!')
     review.user = @user
     review.book = @book
     review.save
@@ -36,11 +42,17 @@ describe 'Book view' do
     @user.reviews << review
     visit "/books/#{@user.slug}/#{@book.title_slug}"
 
-    expect(Book.find_by_title_slug(@book.title_slug).reviews.size).to eq(1)
+    expect(page.body).to include('Really enjoyed the book, better than the last. 5 stars!')
     find_link('Edit review').visible?
   end
 
   it "displays an edit form modal if the user clicks on the 'Edit review' link" do
+    # TODO: click on edit link
+
+    # check that the review is displayed for editing
+  end
+
+  it "displays the updated review" do
 
   end
 

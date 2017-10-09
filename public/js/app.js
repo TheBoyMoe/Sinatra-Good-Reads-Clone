@@ -53,7 +53,8 @@ $(document).ready(function(){
       url: $(review-form).attr('action'),
       data: formData,
       success: function(response){
-        $('.book-review').html(response);
+        // $('.book-review').html(response);
+        console.log("Success: ", response);
       },
       error: function(response){
         console.log("Error submitting book review", response);
