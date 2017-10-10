@@ -23,9 +23,10 @@
     <h2>Reviews</h2>
     <%
       book_reviews = @book.reviews
-      # binding.pry
       current_review = book_reviews.find do |review|
-        review.user.id == @user.id
+        if review.user
+          review.user.id == @user.id
+        end
       end
     %>
     <div id="review-form-container">
