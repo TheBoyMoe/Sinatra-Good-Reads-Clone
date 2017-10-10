@@ -287,8 +287,34 @@ a.close {
   width: 150px;
 }
 
+#review-form-container {
+  padding-bottom: 2.0em;
+  margin-bottom: 2.0em;
+  border-bottom: 1px solid;
+  border-color: rgba(181,181,181,0.40);
+}
 
 
+
+#review-form-container .ui.button {
+  padding: 0.5em 1.0em;
+}
+
+#review-form-container h3.review-author {
+  font-size: 1.4em;
+  font-weight: 500;
+  margin: 0;
+}
+
+#review-form-container p {
+  font-size: 1.2em;
+  font-weight: 400;
+}
+
+#review-form-container .review-timestamp {
+  font-size: 0.8em;
+  font-weight: 300;
+}
 
 /* Typography */
 body,

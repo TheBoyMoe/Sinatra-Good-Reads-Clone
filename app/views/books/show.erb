@@ -31,8 +31,10 @@
     %>
     <div id="review-form-container">
       <% if current_review %>
-        <a class="ui button right" href="/reviews/<%= current_review.id %>/edit" >Edit review</a>
-        <h3>
+        <div class="review-edit-button clearfix">
+          <a class="ui button right" href="/reviews/<%= current_review.id %>/edit" >edit review</a>
+        </div>
+        <h3 class="review-author">
           <%= @user.username.capitalize %>&nbsp;
           <% if current_review.rating && current_review.rating > 0 %>
           <span class="book-user-rating">rating: <%= current_review.rating %></span>

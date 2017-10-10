@@ -44,7 +44,7 @@ describe 'Book view' do
     visit "/books/#{@user.slug}/#{@book.title_slug}"
 
     expect(page.body).to include('Really enjoyed the book, better than the last. 5 stars!')
-    find_link('Edit review').visible?
+    find_link('edit review').visible?
   end
 
   it "displays an edit form modal if the user clicks on the 'Edit review' link" do
