@@ -61,7 +61,35 @@
         </div>
       <% end %>
     </div>
-    <%# TODO: user reviews %>
+    <div class="user-reviews">
+      <% if book_reviews.size > 0 %>
+        <ul class="review-list">
+          <% if !current_review %>
+            <% book_reviews.each do |review| %>
+              <li class="user-review">
+                <h3 class="review-author">
+                  <%= review.user.username.capitalize %>&nbsp;
+                  <span class="review-timestamp"><%= review.created_at.strftime("%b %d, %Y") %></span>
+                </h3>
+                <p class="book-review"><%= review.content %></p>
+              </li>
+            <% end %>
+          <% else %>
+            <% book_reviews.each do |review| %>
+              <% if current_review.id != review.id %>
+                <li class="user-review">
+                  <h3 class="review-author">
+                    <%= review.user.username.capitalize %>&nbsp;
+                    <span class="review-timestamp"><%= review.created_at.strftime("%b %d, %Y") %></span>
+                  </h3>
+                  <p class="book-review"><%= review.content %></p>
+                </li>
+              <% end %>
+            <% end %>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
   </div>
 
 </div>

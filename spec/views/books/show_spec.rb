@@ -53,12 +53,34 @@ describe 'Book view' do
     # check that the review is displayed for editing
   end
 
-  it "displays the updated review" do
-
+  it "displays the updated review once the edited review has been saved" do
+    # TODO:
   end
 
-  it "displays other users reviews" do
+  it "displays other users reviews for the same book" do
+    user1 = User.create(username: 'dick')
+    review1 = Review.new(content: 'Leverage agile frameworks to provide a robust synopsis for high level overviews.')
+    review1.user = user1
+    review1.book = @book
+    review1.save
+    user1.reviews << review1
 
+    user2 = User.create(username: 'harry')
+    review2 = Review.new(content: "Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.")
+    review2.user = user2
+    review2.book = @book
+    review2.save
+    user2.reviews << review2
+
+    @book.reviews << [review1, review2]
+
+    visit "/books/#{@user.slug}/#{@book.title_slug}"
+    save_and_open_page
+
+    expect(page.body).to include('Dick')
+    expect(page.body).to include('Leverage agile frameworks to provide a robust synopsis for high level overviews.')
+    expect(page.body).to include('Harry')
+    expect(page.body).to include("Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.")
   end
 
 
