@@ -18,4 +18,4 @@ Portfolio project built to demonstrate the implementation of the following techn
 
  ## Usage
 
- To use this app, just clone, run `rake db:migrate` and then `shotgun`. Everything should be set up.
+ To use this app, just clone, run `rake db:migrate`. The app uses the Goodreads API to fetch book data for which you'll need to signup to Goodreads and generate a key. Once you have your key, create a `local_env.rb` file in the config folder, adding the `ENV['GOODREADS_API_KEY']` property and setting the api key as it's value. Don't forget to exclude the file from your repo. To run the app, execute `shotgun` from the command prompt.
