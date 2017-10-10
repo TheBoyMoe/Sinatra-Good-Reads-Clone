@@ -13,7 +13,7 @@ footer {
 
 .main,
 footer {
-  padding: 24px 32px;
+  padding: 2.0em 3.0em;
 }
 
 header {
@@ -283,8 +283,16 @@ a.close {
 }
 
 /* book show page */
+.main.book-template {
+  padding-top: 4.0em;
+}
+
 .book-show .ui.small.image {
   width: 150px;
+}
+
+.review-list {
+  margin: 0
 }
 
 .user-review {
@@ -312,6 +320,15 @@ a.close {
 .user-review .review-timestamp {
   font-size: 0.8em;
   font-weight: 300;
+}
+
+
+.ui.accordion .title:not(.ui) {
+  margin-bottom: 2.0em;
+}
+
+.ui.form.review-form .field.submit {
+  margin-bottom: 3.0em;
 }
 
 /* Typography */

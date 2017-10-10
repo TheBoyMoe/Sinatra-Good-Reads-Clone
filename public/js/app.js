@@ -63,11 +63,18 @@ $(document).ready(function(){
 
         $('#review-form-container').after(html);
         $('#review-form-container').remove();
+        $('#user-message').remove();
       },
       error: function(response){
         console.log("Error submitting book review", response);
       }
     });
   })
+
+
+  // accordian effect on add review form
+  $('.ui.accordion')
+    .accordion()
+  ;
 
 });

@@ -19,15 +19,16 @@ describe 'Book view' do
   it "displays a form allowing the user to add a review if they have not already" do
     visit "/books/#{@user.slug}/#{@book.title_slug}"
 
-    expect(page).to have_field(:review)
-    find_button('Add review')
+    # confirm hidden elements are present
+    page.has_css?('form#review-form', visible: false)
+    find_button('Add review', visible: false)
   end
 
   # TODO: test a returning ajax call
   it "updates page, displaying the submitted review, and 'Edit review' link, after a review is submitted" do
     visit "/books/#{@user.slug}/#{@book.title_slug}"
-    fill_in(:review, with: 'Loved the book, better than the first. 5 stars!')
-    find_button('Add review').click
+    fill_in(:review, with: 'Loved the book, better than the first. 5 stars!', visible: false)
+    find_button('Add review', visible: false).click
 
     # check review displayed
     expect(page.body).to include('Loved the book, better than the first. 5 stars!')
@@ -75,7 +76,6 @@ describe 'Book view' do
     @book.reviews << [review1, review2]
 
     visit "/books/#{@user.slug}/#{@book.title_slug}"
-    save_and_open_page
 
     expect(page.body).to include('Dick')
     expect(page.body).to include('Leverage agile frameworks to provide a robust synopsis for high level overviews.')
