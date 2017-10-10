@@ -13,7 +13,7 @@ class ReviewsController < ApplicationController
       user.reviews << review
       book.reviews << review
 
-      response.body = "#{params[:review]} / #{user.slug} / #{review.id}"
+      response.body = "#{params[:review]} / #{user.slug.capitalize} / #{review.id} / #{review.created_at.strftime("%b %d, %Y")}"
     end
   end
 

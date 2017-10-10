@@ -57,8 +57,9 @@ $(document).ready(function(){
         var review = values[0];
         var username = values[1];
         var review_url = values[2];
+        var timestamp = values[3];
         html =
-        '<div id="review-contaier"><h3>' + username + '</h3><p class="book-review">' + review + '</p><a class="ui button right" href="/reviews/' + review_url + '/edit" >Edit review</a></div>'
+        '<div class="user-review"><div class="review-edit-button clearfix"><a class="ui button right" href="/reviews/' + review_url + '/edit">edit review</a></div><h3 class="review-author">' + username + '&nbsp;<span class="review-timestamp">' + timestamp + '</span></h3><p class="book-review">' + review + '</p></div>'
 
         $('#review-form-container').after(html);
         $('#review-form-container').remove();
