@@ -31,14 +31,15 @@
     %>
     <div id="review-form-container">
       <% if current_review %>
+        <a class="ui button right" href="/reviews/<%= current_review.id %>/edit" >Edit review</a>
         <h3>
-          <%= @user.username %>&nbsp;
+          <%= @user.username.capitalize %>&nbsp;
           <% if current_review.rating && current_review.rating > 0 %>
           <span class="book-user-rating">rating: <%= current_review.rating %></span>
           <% end %>
+          <span class="review-timestamp"><%= current_review.created_at.strftime("%b %d, %Y") %></span>
         </h3>
         <p class="book-review"><%= current_review.content %></p>
-        <a class="ui button right" href="/reviews/<%= current_review.id %>/edit" >Edit review</a>
       <% else %>
         <h3>Add a review</h3>
         <form id="review-form" class="ui form review-form" action="/reviews/<%= @user.slug %>/<%= @book.title_slug %>" method="post">
