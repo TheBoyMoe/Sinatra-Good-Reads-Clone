@@ -79,17 +79,18 @@ describe 'Book view' do
       find_link('edit review').visible?
     end
 
-    it "displays a modal with a textarea allowing the user to edit their review when the user clicks on the 'edit review' link" do
+    it "displays a modal with a textarea allowing the user to edit their review contents when the user clicks on the 'edit review' link" do
       visit("/books/#{@user.slug}/#{@book.title_slug}")
       click_link('edit review').click
 
-      expect(page.body).to include("The Illustrated Man")
-      expect(page.body).to include('Ray Bradbury')
+      expect(page).to have_selector('form')
+      expect(page).to have_selector('textarea')
       expect(page.body).to include("Really enjoyed the book, better than the last. 5 stars!")
+      find_button('Update review')
     end
 
+    # TODO:
     it "displays the updated review once the edited review has been saved" do
-      # TODO:
     end
 
   end
