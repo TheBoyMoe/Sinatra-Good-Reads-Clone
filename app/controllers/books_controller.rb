@@ -68,10 +68,18 @@ class BooksController < ApplicationController
   # book#show action
   get '/books/:user_slug/:title_slug' do
     @user = User.find_by_slug(params[:user_slug])
-    # fetch book description and update the book
     @book = Book.find_by_title_slug(params[:title_slug])
-    if @book && !@book.description
-      @book = FetchBookDescription.new(@book.goodreads_id).save_description
+
+    if !@user || !@book
+      not_found
+    else
+      if @user.id != current_user.id
+        redirect :'/'
+      else
+        if @book && !@book.description
+          @book = FetchBookDescription.new(@book.goodreads_id).save_description
+        end
+      end
     end
 
     erb :'/books/show'
