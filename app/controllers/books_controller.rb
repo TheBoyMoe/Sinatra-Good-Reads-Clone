@@ -73,6 +73,7 @@ class BooksController < ApplicationController
     if !@user || !@book
       not_found
     else
+      # binding.pry
       if @user.id != current_user.id
         redirect :'/'
       else
