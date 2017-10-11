@@ -8,8 +8,8 @@ Specs:
 - [x] Include user accounts
 - [x] Include user input validations
 - [x] Display validation failures to user with error message (example form URL e.g. /posts/new)
-- [ ] Ensure that users can't modify content created by other users
-- [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
+- [X] Ensure that users can't modify content created by other users
+- [X] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
 
 Confirm
 - [x] You have a large number of small Git commits

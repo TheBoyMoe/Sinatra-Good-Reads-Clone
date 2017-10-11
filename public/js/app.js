@@ -59,11 +59,12 @@ $(document).ready(function(){
         var review_url = values[2];
         var timestamp = values[3];
         html =
-        '<div class="user-review"><div class="review-edit-button clearfix"><a class="ui button right" href="/reviews/' + review_url + '/edit">edit review</a></div><h3 class="review-author">' + username + '&nbsp;<span class="review-timestamp">' + timestamp + '</span></h3><p class="book-review">' + review + '</p></div>'
+        '<div class="user-review"><div class="review-edit-button clearfix"><a class="ui button right edit-review-trigger" href="#">edit review</a></div><h3 class="review-author">' + username + '&nbsp;<span class="review-timestamp">' + timestamp + '</span></h3><p class="book-review">' + review + '</p></div>'
 
         $('#review-form-container').after(html);
         $('#review-form-container').remove();
         $('#user-message').remove();
+        window.location.reload(true);
       },
       error: function(response){
         console.log("Error submitting book review", response);
