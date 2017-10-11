@@ -28,12 +28,14 @@
           review.user.id == @user.id
         end
       end
+      # binding.pry
     %>
     <div id="review-container">
       <% if current_review %>
         <div class="user-review">
           <div class="review-edit-button clearfix">
-            <a class="ui button right" href="/reviews/<%= current_review.id %>/edit" >edit review</a>
+            <!-- <a class="ui button right" href="/reviews/<%= current_review.id %>/edit" >edit review</a> -->
+            <a href="#" class="ui button right edit-review-trigger">edit review</a>
           </div>
           <h3 class="review-author">
             <%= @user.username.capitalize %>&nbsp;
@@ -99,9 +101,26 @@
           <% end %>
         </ul>
       <% else %>
-        <p id="user-message">Be the first to write a review!</p>  
+        <p id="user-message">Be the first to write a review!</p>
       <% end %>
     </div>
   </div>
+
+  <% if current_review %>
+    <div class="ui modal">
+      <i class="close icon"></i>
+      <div class="header">
+        <h3><%= current_review.book.title %></h3>
+        <h4><%= current_review.book.author %></h4>
+      </div>
+      <div class="content">
+        <%# TODO: add form %>
+        <p><%= current_review.content %></p>
+      </div>
+      <!-- <div class="actions">
+        <div class="ui cancel button">close</div>
+      </div> -->
+    </div>
+  <% end %>
 
 </div>

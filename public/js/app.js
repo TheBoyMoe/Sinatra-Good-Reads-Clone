@@ -77,4 +77,13 @@ $(document).ready(function(){
     .accordion()
   ;
 
+  // display review edit form through modal
+  $('.ui.modal')
+    .modal('attach events', '.edit-review-trigger', 'show')
+  ;
+
+  $('.edit-review-trigger').click(function(e){
+    e.preventDefault();
+  })
+
 });

@@ -16,48 +16,6 @@ describe 'Book view' do
     expect(page.body).to include("That The Illustrated Man has remained in print since being published in 1951 is fair testimony to the universal appeal of Ray Bradbury's work.")
   end
 
-  it "displays a form allowing the user to add a review if they have not already" do
-    visit "/books/#{@user.slug}/#{@book.title_slug}"
-
-    # confirm hidden elements are present
-    page.has_css?('form#review-form', visible: false)
-    find_button('Add review', visible: false)
-  end
-
-  # TODO: test a returning ajax call
-  it "updates page, displaying the submitted review, and 'Edit review' link, after a review is submitted" do
-    visit "/books/#{@user.slug}/#{@book.title_slug}"
-    fill_in(:review, with: 'Loved the book, better than the first. 5 stars!', visible: false)
-    find_button('Add review', visible: false).click
-
-    # check review displayed
-    expect(page.body).to include('Loved the book, better than the first. 5 stars!')
-    # find_link('Edit review').visible?
-  end
-
-  it "displays a review and an 'Edit review' link if the user added a review in the past" do
-    review = Review.create(content: 'Really enjoyed the book, better than the last. 5 stars!')
-    review.user = @user
-    review.book = @book
-    review.save
-    @book.reviews << review
-    @user.reviews << review
-    visit "/books/#{@user.slug}/#{@book.title_slug}"
-
-    expect(page.body).to include('Really enjoyed the book, better than the last. 5 stars!')
-    find_link('edit review').visible?
-  end
-
-  it "displays an edit form modal if the user clicks on the 'Edit review' link" do
-    # TODO: click on edit link
-
-    # check that the review is displayed for editing
-  end
-
-  it "displays the updated review once the edited review has been saved" do
-    # TODO:
-  end
-
   it "displays other users reviews for the same book" do
     user1 = User.create(username: 'dick')
     review1 = Review.new(content: 'Leverage agile frameworks to provide a robust synopsis for high level overviews.')
@@ -82,6 +40,62 @@ describe 'Book view' do
     expect(page.body).to include('Harry')
     expect(page.body).to include("Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.")
   end
+
+  context 'Allow a user to add a review' do
+    it "displays a form allowing the user to add a review if they have not already" do
+      visit "/books/#{@user.slug}/#{@book.title_slug}"
+
+      # confirm hidden elements are present
+      page.has_css?('form#review-form', visible: false)
+      find_button('Add review', visible: false)
+    end
+
+    # TODO: test a returning ajax call
+    it "updates page, displaying the submitted review, and 'Edit review' link, after a review is submitted" do
+      visit "/books/#{@user.slug}/#{@book.title_slug}"
+      fill_in(:review, with: 'Loved the book, better than the first. 5 stars!', visible: false)
+      find_button('Add review', visible: false).click
+
+      # check review displayed
+      expect(page.body).to include('Loved the book, better than the first. 5 stars!')
+      # find_link('Edit review').visible?
+    end
+  end
+
+  context 'Edit Review' do
+    before :each do
+      @review = Review.new(content: 'Really enjoyed the book, better than the last. 5 stars!')
+      @review.user = @user
+      @review.book = @book
+      @review.save
+      @book.reviews << @review
+      @user.reviews << @review
+    end
+
+    it "displays a review and an 'Edit review' link if the user added a review in the past" do
+      visit "/books/#{@user.slug}/#{@book.title_slug}"
+
+      expect(page.body).to include('Really enjoyed the book, better than the last. 5 stars!')
+      find_link('edit review').visible?
+    end
+
+    it "displays a modal with a textarea allowing the user to edit their review when the user clicks on the 'edit review' link" do
+      visit("/books/#{@user.slug}/#{@book.title_slug}")
+      click_link('edit review').click
+
+      expect(page.body).to include("The Illustrated Man")
+      expect(page.body).to include('Ray Bradbury')
+      expect(page.body).to include("Really enjoyed the book, better than the last. 5 stars!")
+    end
+
+    it "displays the updated review once the edited review has been saved" do
+      # TODO:
+    end
+
+  end
+
+
+
 
 
 end
