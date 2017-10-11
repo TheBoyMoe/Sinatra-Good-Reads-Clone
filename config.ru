@@ -5,7 +5,7 @@ if ActiveRecord::Migrator.needs_migration?
   raise 'Migrations are pending. Run `rake db:migrate` to resolve the issue.'
 end
 
-# enable path, delete rest methods
+# enable patch, delete rest methods
 use Rack::MethodOverride
 
 use SearchController

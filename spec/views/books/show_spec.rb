@@ -89,8 +89,15 @@ describe 'Book view' do
       find_button('Update review')
     end
 
-    # TODO:
-    it "displays the updated review once the edited review has been saved" do
+    it "displays the updated review once the edited review has been saved and 'edit review' link" do
+      visit "/books/#{@user.slug}/#{@book.title_slug}"
+      click_link('edit review').click
+      fill_in(:edit, with: "Didn't like the book at all. Gave it only 2 stars")
+      find_button('Update review').click
+      follow_redirect!
+
+      find_link('edit review').visible?
+      expect(page.body).to include("Didn't like the book at all. Gave it only 2 stars")
     end
 
   end

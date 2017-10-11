@@ -25,7 +25,15 @@ class ReviewsController < ApplicationController
 
   # reviews#update action - update the instance
   patch '/reviews/:id/edit' do
+    review = Review.find(params[:id])
+    if params[:content] != ''
+      review.content = params[:content]
+      review.save
+    end
+    user = review.user
+    book = review.book
 
+    redirect :"/books/#{user.slug}/#{book.title_slug}"
   end
 
 

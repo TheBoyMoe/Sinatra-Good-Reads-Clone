@@ -114,11 +114,11 @@
         <h4>by <%= current_review.book.author %></h4>
       </div>
       <div class="content">
-        <form id="edit-review-form" class="ui form edit-review-form" action="/reviews/<%= current_review.id %>/edit %>" method="post">
+        <form id="edit-review-form" class="ui form edit-review-form" action="/reviews/<%= current_review.id %>/edit" method="post">
           <input type="hidden" name="_method" value="patch">
 
           <div class="review-field">
-            <textarea id="edit-review" name="review" rows="8" cols="80" required><%= current_review.content %></textarea>
+            <textarea id="edit" name="content" rows="8" cols="80" required><%= current_review.content %></textarea>
           </div>
 
           <div class="field submit">
@@ -127,9 +127,6 @@
 
         </form>
       </div>
-      <!-- <div class="actions">
-        <div class="ui cancel button">close</div>
-      </div> -->
     </div>
   <% end %>
 

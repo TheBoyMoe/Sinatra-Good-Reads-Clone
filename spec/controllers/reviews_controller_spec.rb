@@ -19,11 +19,24 @@ describe 'ReviewsController' do
     end
   end
 
-  # TODO: update the review
   # test review#update action
-  xdescribe "patch /reviews/:id/edit" do
-    it "updates the review" do
+  describe "patch /reviews/:id/edit" do
+    before :each do
+      @review = Review.new(content: 'Really enjoyed the book, better than the last. 5 stars!')
+      @review.user = @user
+      @review.book = @book
+      @review.save
+      @book.reviews << @review
+      @user.reviews << @review
+    end
 
+    it "updates the review" do
+      visit "/books/#{@user.slug}/#{@book.title_slug}"
+      click_link('edit review').click
+      fill_in(:edit, with: "Didn't like the book at all. Gave it only 2 stars")
+      find_button('Update review').click
+
+      expect(Review.find(@review.id).content).to eq("Didn't like the book at all. Gave it only 2 stars")
     end
   end
 
