@@ -18,10 +18,15 @@ class ReviewsController < ApplicationController
   end
 
   # reviews#edit action - display edit form
-
+  get '/reviews/:id/edit' do
+    @review = Review.find(params[:id])
+    erb :'/reviews/edit'
+  end
 
   # reviews#update action - update the instance
+  patch '/reviews/:id/edit' do
 
+  end
 
 
 end
