@@ -1,0 +1,22 @@
+<div class="ui modal">
+  <i class="close icon"></i>
+  <div class="header">
+    <h2>Edit your book review</h2>
+    <h3><%= @current_review.book.title %></h3>
+    <h4>by <%= @current_review.book.author %></h4>
+  </div>
+  <div class="content">
+    <form id="edit-review-form" class="ui form edit-review-form" action="/reviews/<%= @current_review.id %>/edit" method="post">
+      <input type="hidden" name="_method" value="patch">
+
+      <div class="review-field">
+        <textarea id="edit" name="content" rows="8" cols="80" required><%= @current_review.content %></textarea>
+      </div>
+
+      <div class="field submit">
+        <input class="ui button" type="submit" name="submit" value="Update review">
+      </div>
+
+    </form>
+  </div>
+</div>

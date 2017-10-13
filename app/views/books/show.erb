@@ -23,23 +23,23 @@
     <h2>Reviews</h2>
     <%
       book_reviews = @book.reviews
-      current_review = book_reviews.find do |review|
+      @current_review = book_reviews.find do |review|
         if review.user
           review.user.id == @user.id
         end
       end
     %>
     <div id="review-container">
-      <% if current_review %>
+      <% if @current_review %>
         <div class="user-review">
           <div class="review-edit-button clearfix">
             <a href="#" class="ui button right edit-review-trigger">edit review</a>
           </div>
           <h3 class="review-author">
             <%= @user.username.capitalize %>&nbsp;
-            <span class="review-timestamp"><%= current_review.created_at.strftime("%b %d, %Y") %></span>
+            <span class="review-timestamp"><%= @current_review.created_at.strftime("%b %d, %Y") %></span>
           </h3>
-          <p class="book-review"><%= current_review.content %></p>
+          <p class="book-review"><%= @current_review.content %></p>
         </div>
       <% else %>
         <%= erb :'/partials/_add_review'%>
@@ -48,7 +48,7 @@
     <div class="user-reviews">
       <% if book_reviews.size > 0 %>
         <ul class="review-list">
-          <% if !current_review %>
+          <% if !@current_review %>
             <% book_reviews.each do |review| %>
               <li class="user-review">
                 <h3 class="review-author">
@@ -60,7 +60,7 @@
             <% end %>
           <% else %>
             <% book_reviews.each do |review| %>
-              <% if current_review.id != review.id %>
+              <% if @current_review.id != review.id %>
                 <li class="user-review">
                   <h3 class="review-author">
                     <%= review.user.username.capitalize %>&nbsp;
@@ -78,29 +78,8 @@
     </div>
   </div>
 
-  <% if current_review %>
-    <div class="ui modal">
-      <i class="close icon"></i>
-      <div class="header">
-        <h2>Edit your book review</h2>
-        <h3><%= current_review.book.title %></h3>
-        <h4>by <%= current_review.book.author %></h4>
-      </div>
-      <div class="content">
-        <form id="edit-review-form" class="ui form edit-review-form" action="/reviews/<%= current_review.id %>/edit" method="post">
-          <input type="hidden" name="_method" value="patch">
-
-          <div class="review-field">
-            <textarea id="edit" name="content" rows="8" cols="80" required><%= current_review.content %></textarea>
-          </div>
-
-          <div class="field submit">
-            <input class="ui button" type="submit" name="submit" value="Update review">
-          </div>
-
-        </form>
-      </div>
-    </div>
+  <% if @current_review %>
+    <%= erb :'/partials/_edit_review'%>
   <% end %>
 
 </div>
