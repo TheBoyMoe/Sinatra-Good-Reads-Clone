@@ -13,6 +13,8 @@ class UsersController < ApplicationController
   post '/signup' do
     user = User.new(params)
     if !user.save
+      # This could be a helper method. present?(params[:username]) or if you import active_support core extensions you can use blank
+      # http://guides.rubyonrails.org/active_support_core_extensions.html
       if !params[:username] || params[:username] == '' || !params[:email] || params[:email] == '' || params[:password] == ""
         flash[:alert] = "Error registering account, ensure all fields are complete and try again"
       elsif User.find_by_slug(params[:username].downcase.gsub(' ', '-'))
@@ -22,6 +24,7 @@ class UsersController < ApplicationController
       end
       redirect :'/signup'
     else
+      # Maybe an opportunity for a factory method if this is something we want to do often
       # create default book shelves
       user.shelves << [
         # Shelf.create(title: 'all'),
