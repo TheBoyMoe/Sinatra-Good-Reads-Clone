@@ -1,0 +1,24 @@
+<div id="review-form-container">
+  <div class="ui fluid accordion">
+    <div class="title">
+      <i class="dropdown icon"></i>
+      Add a review
+    </div>
+    <div class="content">
+      <div class="transition hidden" style="display: none !important;">
+        <!-- <h3>Add a review</h3> -->
+        <form id="review-form" class="ui form review-form" action="/reviews/<%= @user.slug %>/<%= @book.title_slug %>" method="post">
+
+          <div class="review-field">
+            <textarea id="review" name="review" rows="8" cols="80" required></textarea>
+          </div>
+
+          <div class="field submit">
+            <input class="ui button" type="submit" name="submit" value="Add review">
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
