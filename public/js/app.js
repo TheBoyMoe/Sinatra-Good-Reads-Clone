@@ -1,6 +1,5 @@
 $(document).ready(function(){
   // fade out flash message following delay
-  // $('.flash-message').delay(4000).fadeOut();
 
   // $('.flash-message-wrapper').hide();
 
@@ -32,7 +31,9 @@ $(document).ready(function(){
           var vals = response.split('-')
           if (vals[0] == goodreads_id) {
             $(".message-" + goodreads_id).show();
+            // REVIEW: overwrites any previous message still visible
             $(".flash-message").html(vals[1]);
+            $('.flash-message-wrapper').delay(4000).fadeOut();
           }
         },
         error: function(response){
