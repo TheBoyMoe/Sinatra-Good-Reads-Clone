@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
 
+  # This endpoint is screaming to be refactored
   # book#create action
   post '/books' do
 
