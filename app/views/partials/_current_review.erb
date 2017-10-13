@@ -1,0 +1,10 @@
+<div class="user-review">
+  <div class="review-edit-button clearfix">
+    <a href="#" class="ui button right edit-review-trigger">edit review</a>
+  </div>
+  <h3 class="review-author">
+    <%= @user.username.capitalize %>&nbsp;
+    <span class="review-timestamp"><%= @current_review.created_at.strftime("%b %d, %Y") %></span>
+  </h3>
+  <p class="book-review"><%= @current_review.content %></p>
+</div>
