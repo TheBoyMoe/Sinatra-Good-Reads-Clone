@@ -18,6 +18,8 @@ class Book < ActiveRecord::Base
   end
 
   def self.find_by_author_slug(slug)
+    # Very inefficient. You can use the Book.find_by(author_slug: slug)
+    # http://api.rubyonrails.org/v5.1/classes/ActiveRecord/FinderMethods.html#method-i-find_by
     Book.all.find do |book|
       book.author_slug == slug
     end
