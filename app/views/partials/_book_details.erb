@@ -1,0 +1,19 @@
+<div class="book book-show clearfix">
+  <div class="book-image left">
+    <% if @book.image_url %>
+      <img class="ui small image" src="<%= @book.image_url %>" alt="Book cover image">
+    <% else %>
+      <img class="ui small image" src="/public.imgs/no-image.png" alt="Book cover placeholder image">
+    <% end %>
+  </div>
+  <div class="book-info">
+    <p class="book-title"><%= @book.title %></a></p>
+    <p class="book-author">by <%= @book.author %></p>
+    <p class="book-rating">
+      <span class="book-rating-avg"><%= @book.ratings_average %> avg rating by</span>
+      <span class="book-rating-count"><%= @book.ratings_count %> users</span>
+      <span class="book-publication-date"> &dash; published <%= @book.year_published %></span>
+    </p>
+  </div>
+  <div class="book-description"><%= @book.description %></div>
+</div>

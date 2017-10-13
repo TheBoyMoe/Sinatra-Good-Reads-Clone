@@ -1,23 +1,6 @@
 <div class="main book-template wrapper">
-  <div class="book book-show clearfix">
-    <div class="book-image left">
-      <% if @book.image_url %>
-        <img class="ui small image" src="<%= @book.image_url %>" alt="Book cover image">
-      <% else %>
-        <img class="ui small image" src="/public.imgs/no-image.png" alt="Book cover placeholder image">
-      <% end %>
-    </div>
-    <div class="book-info">
-      <p class="book-title"><%= @book.title %></a></p>
-      <p class="book-author">by <%= @book.author %></p>
-      <p class="book-rating">
-        <span class="book-rating-avg"><%= @book.ratings_average %> avg rating by</span>
-        <span class="book-rating-count"><%= @book.ratings_count %> users</span>
-        <span class="book-publication-date"> &dash; published <%= @book.year_published %></span>
-      </p>
-    </div>
-    <div class="book-description"><%= @book.description %></div>
-  </div>
+
+  <%= erb :'/partials/_book_details' %>
 
   <div class="review-list">
     <h2>Reviews</h2>
@@ -50,24 +33,14 @@
         <ul class="review-list">
           <% if !@current_review %>
             <% book_reviews.each do |review| %>
-              <li class="user-review">
-                <h3 class="review-author">
-                  <%= review.user.username.capitalize %>&nbsp;
-                  <span class="review-timestamp"><%= review.created_at.strftime("%b %d, %Y") %></span>
-                </h3>
-                <p class="book-review"><%= review.content %></p>
-              </li>
+              <% @review = review %>
+              <%= erb :'/partials/_book_review' %>
             <% end %>
           <% else %>
             <% book_reviews.each do |review| %>
-              <% if @current_review.id != review.id %>
-                <li class="user-review">
-                  <h3 class="review-author">
-                    <%= review.user.username.capitalize %>&nbsp;
-                    <span class="review-timestamp"><%= review.created_at.strftime("%b %d, %Y") %></span>
-                  </h3>
-                  <p class="book-review"><%= review.content %></p>
-                </li>
+              <% @review = review %>
+              <% if @current_review.id != @review.id %>
+                <%= erb :'/partials/_book_review' %>
               <% end %>
             <% end %>
           <% end %>

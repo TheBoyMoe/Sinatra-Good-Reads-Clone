@@ -1,0 +1,7 @@
+<li class="user-review">
+  <h3 class="review-author">
+    <%= @review.user.username.capitalize %>&nbsp;
+    <span class="review-timestamp"><%= @review.created_at.strftime("%b %d, %Y") %></span>
+  </h3>
+  <p class="book-review"><%= @review.content %></p>
+</li>
