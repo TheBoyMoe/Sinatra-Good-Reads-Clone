@@ -1,6 +1,5 @@
 class BooksController < ApplicationController
-  # REVIEW:
-  # This endpoint is screaming to be refactored
+
   # book#create action
   post '/books' do
 
@@ -17,39 +16,15 @@ class BooksController < ApplicationController
     #   "submit"=>"save"
     # }
 
-    # has the user saved the book in the past
-    # users_books = []
-    # current_user.shelves.each do |shelf|
-    #   shelf.books.each {|book| users_books << book}
-    # end
+    book = Book.find_by(goodreads_id: params[:goodreads_id].to_i) || create_book(params)
+    if book.nil?
+      response.body = generate_response(params, 'Error saving book')
+      return
+    end
 
-    # previous_book = users_books.find do |b|
-    #   b.goodreads_id == params[:goodreads_id].to_i
-    # end
-
-    # has the book been saved before
-    # book = Book.all.find do |b|
-    #   b.goodreads_id == params[:goodreads_id].to_i
-    # end
-
-    previous_book = has_user_saved_book_before(params)
-    book = has_book_been_saved_before(params)
-
-    if !book
-      new_book = make_book(params)
-
-      if new_book.save
-        # add book to the appropriate shelf & inform user
-        save_book_to_shelf(params[:book_shelf_name], new_book)
-        response.body = generate_response(params, 'Book successfully saved')
-      else
-        response.body = generate_response(params, 'Error saving book')
-      end
-    elsif book && !previous_book
-      # book has been saved by another user, save it to the current user's book shelf
-      save_book_to_shelf(params[:book_shelf_name], book)
+    if save_book_to_shelf(params[:book_shelf_name], book)
       response.body = generate_response(params, 'Book successfully saved')
-    elsif previous_book
+    else
       response.body = generate_response(params, 'You have saved this book previously')
     end
 
@@ -77,13 +52,14 @@ class BooksController < ApplicationController
 
   private
     def save_book_to_shelf(shelf, book)
-      case shelf
-      when 'to-read'
-        Shelf.find_by_slug('to-read', current_user.id).books << book
-      when 'reading'
-        Shelf.find_by_slug('reading', current_user.id).books << book
+      # retrieve all the books in the users book shelf
+      books_in_shelf = Shelf.find_by_slug(shelf, current_user.id).books
+      # save the book if not found
+      if books_in_shelf.include? book
+        false
       else
-        Shelf.find_by_slug('read', current_user.id).books << book
+        books_in_shelf << book
+        true
       end
     end
 
@@ -91,8 +67,8 @@ class BooksController < ApplicationController
       "#{params[:goodreads_id]}-#{message}"
     end
 
-    def make_book(params)
-      book = Book.new(
+    def create_book(params)
+      Book.create(
         goodreads_id: params[:goodreads_id],
         title: params[:title],
         author: params[:author],
@@ -102,7 +78,6 @@ class BooksController < ApplicationController
         ratings_count: params[:ratings_count],
         reviews_count: params[:reviews_count]
       )
-      book
     end
 
     def has_user_saved_book_before(params)
