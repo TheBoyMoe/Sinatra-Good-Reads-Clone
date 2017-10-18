@@ -52,13 +52,12 @@ class BooksController < ApplicationController
 
   private
     def save_book_to_shelf(shelf, book)
-      # retrieve all the books in the users book shelf
-      books_in_shelf = Shelf.find_by_slug(shelf, current_user.id).books
+      books = current_user.books
       # save the book if not found
-      if books_in_shelf.include? book
+      if books.include? book
         false
       else
-        books_in_shelf << book
+        current_user.shelves.find_by(title: shelf).books << book
         true
       end
     end
