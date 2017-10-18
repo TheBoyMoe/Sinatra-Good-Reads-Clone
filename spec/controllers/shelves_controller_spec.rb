@@ -27,7 +27,7 @@ describe 'ShelvesController' do
   end
 
   # TODO
-  xcontext "when the user logs in and clicks on the 'myBooks' link" do
+  context "when the user logs in and clicks on the 'myBooks' link" do
 
     # click_link and click_on do not work
 
@@ -43,7 +43,7 @@ describe 'ShelvesController' do
     # end
 
     it "displays 'all' the user's books by default" do
-      visit "/shelves/#{@user.slug}"
+      get "/shelves/#{@user.slug}"
       save_and_open_page
 
       page.has_text?('The Martian Chronicles', {exact: true})
@@ -52,7 +52,7 @@ describe 'ShelvesController' do
     end
 
     it "displays the books in the 'read' shelf when clicking on the 'read' link" do
-      visit "/shelves/#{@user.slug}"
+      get "/shelves/#{@user.slug}"
       find('#read-link').click
       # save_and_open_page
 
@@ -70,21 +70,22 @@ describe 'ShelvesController' do
     end
 
     it "displays the books in the 'to-read' shelf when clicking on the 'to read' link" do
-      visit "/shelves/#{@user.slug}"
+      get "/shelves/#{@user.slug}"
+      binding.pry
       find('#to-read-link').click
       # TODO
 
     end
 
     it "displays the books in the 'reading' shelf when clicking on the 'reading' link" do
-      visit "/shelves/#{@user.slug}"
+      get "/shelves/#{@user.slug}"
       find('#reading-link').click
       # TODO
 
     end
 
     it "displays all the books when the user clicks on the 'all' link" do
-      visit "/shelves/#{@user.slug}"
+      get "/shelves/#{@user.slug}"
       find('#all-link').click
       # TODO
     end
@@ -95,7 +96,7 @@ describe 'ShelvesController' do
   xcontext "click on book title link" do
 
     it "redirects user to the book show page displaying book details, including description" do
-      visit "/shelves/#{@user.slug}"
+      get "/shelves/#{@user.slug}"
       # save_and_open_page
       click_link "The Illustrated Man"
       follow_redirect!
