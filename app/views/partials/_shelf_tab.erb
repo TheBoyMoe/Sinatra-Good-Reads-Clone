@@ -1,0 +1,18 @@
+<ul class="book-list">
+  <% books.each do |book| %>
+    <li class="book clearfix">
+      <div class="book-image left">
+        <img class="ui small image" src="<%= book.image_url %>" alt="Book cover image">
+      </div>
+      <div class="book-info left">
+      <p class="book-title"><a href="/books/<%= @user.slug %>/<%= book.title_slug %>"><%= book.title %></a></p>
+        <p class="book-author">by <%= book.author %></p>
+        <p class="book-rating">
+          <span class="book-rating-avg"><%= book.ratings_average %> avg rating by</span>
+          <span class="book-rating-count"><%= book.ratings_count %> users</span>
+          <span class="book-publication-date"> &dash; published <%= book.year_published %></span>
+        </p>
+      </div>
+    </li>
+  <% end %>
+</ul>
