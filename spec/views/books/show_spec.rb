@@ -55,7 +55,7 @@ describe 'Book view' do
   context 'Allow a user to add a review' do
     it "displays a form allowing the user to add a review if they have not already" do
       visit "/books/#{@user.slug}/#{@book.title_slug}"
-      
+
       # confirm hidden elements are present
       page.has_css?('form#review-form', visible: false)
       page.has_css?('.field.submit .button[type="submit"]', visible: false)
@@ -68,11 +68,10 @@ describe 'Book view' do
       find_button('Add review', visible: false).click
 
       expect(page.body).to include('Loved the book, better than the first. 5 stars!')
-      # find_link('edit review').visible?
     end
   end
 
-  xcontext 'Edit Review' do
+  context 'Edit Review' do
     before :each do
       @review = Review.new(content: 'Really enjoyed the book, better than the last. 5 stars!')
       @review.user = @user
@@ -102,9 +101,9 @@ describe 'Book view' do
     it "displays the updated review once the edited review has been saved and 'edit review' link" do
       visit "/books/#{@user.slug}/#{@book.title_slug}"
       click_link('edit review').click
-      fill_in(:edit, with: "Didn't like the book at all. Gave it only 2 stars")
+      fill_in 'edit', with: "Didn't like the book at all. Gave it only 2 stars"
       find_button('Update review').click
-      follow_redirect!
+      # follow_redirect!
 
       find_link('edit review').visible?
       expect(page.body).to include("Didn't like the book at all. Gave it only 2 stars")
