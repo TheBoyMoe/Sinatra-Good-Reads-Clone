@@ -13,15 +13,18 @@ describe 'Book view' do
     @user.save
     @user.shelves.find_by(title: 'read').books << @book
 
-    get '/login', {}, {'rack.session' => {user_id: @user.id}}
+    visit '/login'
+    fill_in "username", with: @user.username
+    fill_in "password", with: @user.password
+    click_button "Login"
   end
 
   it "displays the book details" do
-    get "/books/#{@user.slug}/#{@book.title_slug}"
+    visit "/books/#{@user.slug}/#{@book.title_slug}"
 
-    expect(last_response.body).to include('The Illustrated Man')
-    expect(last_response.body).to include('Ray Bradbury')
-    expect(last_response.body).to include("That The Illustrated Man has remained in print since being published in 1951 is fair testimony to the universal appeal of Ray Bradbury's work.")
+    expect(page.body).to include('The Illustrated Man')
+    expect(page.body).to include('Ray Bradbury')
+    expect(page.body).to include("That The Illustrated Man has remained in print since being published in 1951 is fair testimony to the universal appeal of Ray Bradbury's work.")
   end
 
   it "displays other users reviews for the same book" do
@@ -41,32 +44,31 @@ describe 'Book view' do
 
     @book.reviews << [review1, review2]
 
-    get "/books/#{@user.slug}/#{@book.title_slug}"
+    visit "/books/#{@user.slug}/#{@book.title_slug}"
 
-    expect(last_response.body).to include('Dick')
-    expect(last_response.body).to include('Leverage agile frameworks to provide a robust synopsis for high level overviews.')
-    expect(last_response.body).to include('Harry')
-    expect(last_response.body).to include("Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.")
+    expect(page.body).to include('Dick')
+    expect(page.body).to include('Leverage agile frameworks to provide a robust synopsis for high level overviews.')
+    expect(page.body).to include('Harry')
+    expect(page.body).to include("Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.")
   end
 
   context 'Allow a user to add a review' do
     it "displays a form allowing the user to add a review if they have not already" do
-      get "/books/#{@user.slug}/#{@book.title_slug}"
-
+      visit "/books/#{@user.slug}/#{@book.title_slug}"
+      
       # confirm hidden elements are present
       page.has_css?('form#review-form', visible: false)
-      page.has_css?('.field.submit .button[type="submit"]')
+      page.has_css?('.field.submit .button[type="submit"]', visible: false)
     end
 
-    # TODO: test a returning ajax call
     it "updates page, displaying the submitted review, and 'Edit review' link, after a review is submitted" do
-      get "/books/#{@user.slug}/#{@book.title_slug}"
-      fill_in(:review, with: 'Loved the book, better than the first. 5 stars!', visible: false)
+      visit "/books/#{@user.slug}/#{@book.title_slug}"
+      find('.title', text: 'Add a review').click
+      fill_in 'review', with: 'Loved the book, better than the first. 5 stars!', visible:false
       find_button('Add review', visible: false).click
 
-      # check review displayed
       expect(page.body).to include('Loved the book, better than the first. 5 stars!')
-      # find_link('Edit review').visible?
+      # find_link('edit review').visible?
     end
   end
 
@@ -109,9 +111,5 @@ describe 'Book view' do
     end
 
   end
-
-
-
-
 
 end

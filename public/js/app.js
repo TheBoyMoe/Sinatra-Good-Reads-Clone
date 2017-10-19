@@ -75,14 +75,10 @@ $(document).ready(function(){
 
 
   // accordian effect on add review form
-  $('.ui.accordion')
-    .accordion()
-  ;
+  $('.ui.accordion').accordion();
 
   // display review edit form through modal
-  $('.ui.modal')
-    .modal('attach events', '.edit-review-trigger', 'show')
-  ;
+  $('.ui.modal').modal('attach events', '.edit-review-trigger', 'show');
 
   $('.edit-review-trigger').click(function(e){
     e.preventDefault();
