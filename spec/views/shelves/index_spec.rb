@@ -15,7 +15,6 @@ describe 'Shelf view' do
       Shelf.create(title: 'reading')
     ]
     @user.save
-    get '/login', {}, {'rack.session' => {user_id: @user.id}}
 
     book1 = Book.create(goodreads_id: 76778, title: 'The Martian Chronicles', author: 'Ray Bradbury')
     book2 = Book.create(goodreads_id: 24830, title: 'The Illustrated Man', author: 'Ray Bradbury')
@@ -24,22 +23,11 @@ describe 'Shelf view' do
     @user.shelves.find_by(title: 'read').books << book1
     @user.shelves.find_by(title: 'to-read').books << book2
     @user.shelves.find_by(title: 'reading').books << book3
+
+    get '/login', {}, {'rack.session' => {user_id: @user.id}}
   end
 
   xcontext "when the user logs in and clicks on the 'myBooks' link" do
-
-    # click_link and click_on do not work
-
-    # it "displays the user's book shelves page" do
-    #   # expect(last_response.status).to eq(302)
-    #   # follow_redirect!
-    #   # expect(last_response.status).to eq(200)
-    #   # expect(last_response.body).to include('myBooks')
-    #   # click_link 'myBooks'
-    #
-    #   expect(page.current_path).to eq("/shelves/#{@user.slug}")
-    #   expect(page.status_code).to eq(200)
-    # end
 
     it "displays 'all' the user's books by default" do
       get "/shelves/#{@user.slug}"
@@ -69,7 +57,6 @@ describe 'Shelf view' do
 
     it "displays the books in the 'to-read' shelf when clicking on the 'to read' link" do
       get "/shelves/#{@user.slug}"
-
       find('#to-read-link').click
       # TODO
 

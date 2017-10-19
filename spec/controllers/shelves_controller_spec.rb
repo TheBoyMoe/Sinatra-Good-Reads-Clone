@@ -20,7 +20,7 @@ describe 'ShelvesController' do
     it "allows users to access their own book shelf" do
       get '/login', {}, {'rack.session' => {user_id: @tom.id}}
       get "/shelves/#{@tom.slug}"
-      binding.pry
+      
       expect(last_response.body).to include("My Books")
       expect(last_response.body).to include('The Martian Chronicles')
       expect(last_response.body).to include('Ray Bradbury')
