@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-xdescribe 'Book view' do
+describe 'Book view' do
   before :each do
     @user = User.create(username: 'tom', email: 'tom@example.com', password: 'pass')
     get '/login', {}, {'rack.session' => {user_id: @user.id}}
@@ -9,7 +9,7 @@ xdescribe 'Book view' do
 
   # fails since user not being logged in - line 77 of books controller
   it "displays the book details" do
-    visit "/books/#{@user.slug}/#{@book.title_slug}"
+    get "/books/#{@user.slug}/#{@book.title_slug}"
     save_and_open_page
 
     expect(page.current_path).to eq("/books/tom/the-illustrated-man")

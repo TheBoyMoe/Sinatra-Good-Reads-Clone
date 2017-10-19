@@ -10,7 +10,7 @@ class ShelvesController < ApplicationController
   private
 
   def redirect_if_unauthorised
-    if params[:slug] != current_user.slug
+    if !current_user || params[:slug] != current_user.slug
       redirect :'/'
       true
     else
