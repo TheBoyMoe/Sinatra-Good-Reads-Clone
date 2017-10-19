@@ -8,7 +8,7 @@ describe 'Shelf view' do
     User.destroy_all
 
     # create user, shelves and log them in
-    @user = User.new(username: 'test user', email: 'test@example.com', password: 'test1234')
+    @user = User.new(username: 'tom', email: 'test@example.com', password: 'pass')
     @user.shelves << [
       Shelf.create(title: 'read'),
       Shelf.create(title: 'to-read'),
@@ -24,13 +24,16 @@ describe 'Shelf view' do
     @user.shelves.find_by(title: 'to-read').books << book2
     @user.shelves.find_by(title: 'reading').books << book3
 
-    get '/login', {}, {'rack.session' => {user_id: @user.id}}
+    visit '/login'
+    fill_in "username", with: "tom"
+    fill_in "password", with: "pass"
+    click_button "Login"
   end
 
-  xcontext "when the user logs in and clicks on the 'myBooks' link" do
+  context "when the user logs in and clicks on the 'myBooks' link" do
 
     it "displays 'all' the user's books by default" do
-      get "/shelves/#{@user.slug}"
+      visit "/shelves/#{@user.slug}"
 
       page.has_text?('The Martian Chronicles', {exact: true})
       page.has_text?('The Illustrated Man', {exact: true})
@@ -38,32 +41,24 @@ describe 'Shelf view' do
     end
 
     it "displays the books in the 'read' shelf when clicking on the 'read' link" do
-      get "/shelves/#{@user.slug}"
+      visit "/shelves/#{@user.slug}"
       find('#read-link').click
-      # save_and_open_page
-
-      # expect(page).to have_css('div.read-link')
-      # expect(page).to has_css?('.all-tab', {visible: true})
-      # expect(page).to has_css?('.read-tab', {visible: false})
-
-      # page.find('#all-tab', :visible => true)
-      # page.find('#read-tab', :visible => :hidden)
-
-      page.has_selector?('#all-tab', {visible: true})
-      page.has_selector?('#read-tab', {visible: :hidden})
-
-      # page.find(:xpath, ".//div[]")
+      binding.pry
+      page.has_css?('.read-tab.active') # visible tab
+      page.has_css?('.all-tab.active')
+      page.has_css?('.reading-tab.active')
+      page.has_css?('.to-read-tab.active')
     end
 
     it "displays the books in the 'to-read' shelf when clicking on the 'to read' link" do
-      get "/shelves/#{@user.slug}"
+      visit "/shelves/#{@user.slug}"
       find('#to-read-link').click
       # TODO
 
     end
 
     it "displays the books in the 'reading' shelf when clicking on the 'reading' link" do
-      get "/shelves/#{@user.slug}"
+      visit "/shelves/#{@user.slug}"
       find('#reading-link').click
       # TODO
 
@@ -93,7 +88,5 @@ describe 'Shelf view' do
     end
 
   end
-
-
 
 end
