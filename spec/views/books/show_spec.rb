@@ -49,18 +49,18 @@ describe 'Book view' do
     expect(last_response.body).to include("Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.")
   end
 
-  xcontext 'Allow a user to add a review' do
+  context 'Allow a user to add a review' do
     it "displays a form allowing the user to add a review if they have not already" do
-      visit "/books/#{@user.slug}/#{@book.title_slug}"
+      get "/books/#{@user.slug}/#{@book.title_slug}"
 
       # confirm hidden elements are present
       page.has_css?('form#review-form', visible: false)
-      find_button('Add review', visible: false)
+      page.has_css?('.field.submit .button[type="submit"]')
     end
 
     # TODO: test a returning ajax call
     it "updates page, displaying the submitted review, and 'Edit review' link, after a review is submitted" do
-      visit "/books/#{@user.slug}/#{@book.title_slug}"
+      get "/books/#{@user.slug}/#{@book.title_slug}"
       fill_in(:review, with: 'Loved the book, better than the first. 5 stars!', visible: false)
       find_button('Add review', visible: false).click
 
