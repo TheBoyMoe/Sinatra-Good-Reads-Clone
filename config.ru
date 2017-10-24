@@ -16,4 +16,4 @@ use ShelvesController
 use UsersController
 run ApplicationController
 
-Capybara.app = ApplicationController
+# Capybara.app = ApplicationController

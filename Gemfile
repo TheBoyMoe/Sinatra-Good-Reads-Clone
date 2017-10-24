@@ -21,7 +21,8 @@ gem 'nokogiri'
 group :test do
   gem 'rspec'
   gem 'capybara'
-  gem 'capybara-webkit'
+  # gem 'capybara-webkit'
+  gem 'selenium-webdriver'
   gem "tux"
   gem 'rack-test'
   gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'

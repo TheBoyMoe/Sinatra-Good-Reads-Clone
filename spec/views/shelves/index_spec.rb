@@ -30,64 +30,75 @@ describe 'Shelf view' do
     click_button "Login"
   end
 
+  # REVIEW: the describe block - not working properly
   describe "when the user logs in and clicks on the 'myBooks' link", js: true do
 
-    it "displays 'all' the user's books by default", :driver => :webkit do
+    it "displays 'all' the user's books by default" do
       visit "/shelves/#{@user.slug}"
-      # REVIEW:
-      page.has_text?('The Martian Chronicles', {exact: true})
-      page.has_text?('The Illustrated Man', {exact: true})
-      page.has_text?('Foundation', {exact: true})
+
+      has_text?(:visible, 'The Martian Chronicles', {exact: true})
+      has_text?(:visible, 'The Illustrated Man', {exact: true})
+      has_text?(:visible, 'Foundation', {exact: true})
     end
 
-    # REVIEW: not working properly
-    it "displays the books in the 'read' shelf when clicking on the 'read' link", :driver => :webkit do
+    it "displays the books in the 'read' shelf when clicking on the 'read' link" do
       visit "/shelves/#{@user.slug}"
       find('#read-link').click
-      save_and_open_page
-      page.has_css?('.read-tab.active') # visible tab
-      page.has_css?('.all-tab.false')
-      page.has_css?('.reading-tab.false')
-      page.has_css?('.to-read-tab.false')
+
+      # page.has_css?('.read-tab.active') # visible tab
+      # page.has_css?('.all-tab')
+      # page.has_css?('.reading-tab')
+      # page.has_css?('.to-read-tab')
+
+      has_no_text?(:visible, 'The Martian Chronicles', {exact: true})
+      has_no_text?(:visible, 'The Illustrated Man', {exact: true})
+      has_no_text?(:visible, 'Foundation', {exact: true})
     end
 
     it "displays the books in the 'to-read' shelf when clicking on the 'to read' link" do
       visit "/shelves/#{@user.slug}"
       find('#to-read-link').click
-      # TODO
 
+      has_text?(:visible, 'The Illustrated Man', {exact: true})
+      has_no_text?(:visible, 'The Martian Chronicles', {exact: true})
+      has_no_text?(:visible, 'Foundation', {exact: true})
     end
 
     it "displays the books in the 'reading' shelf when clicking on the 'reading' link" do
       visit "/shelves/#{@user.slug}"
       find('#reading-link').click
-      # TODO
 
+      has_text?(:visible, 'Foundation', {exact: true})
+      has_no_text?(:visible, 'The Illustrated Man', {exact: true})
+      has_no_text?(:visible, 'The Martian Chronicles', {exact: true})
     end
 
     it "displays all the books when the user clicks on the 'all' link" do
-      get "/shelves/#{@user.slug}"
+      visit "/shelves/#{@user.slug}"
       find('#all-link').click
-      # TODO
+
+      has_text?('The Martian Chronicles', {exact: true})
+      has_text?('The Illustrated Man', {exact: true})
+      has_text?('Foundation', {exact: true})
     end
 
   end
 
-  # TODO finds two links on page
-  xcontext "click on book title link" do
-
+  context "click on book title link", :feature => :type do
     it "redirects user to the book show page displaying book details, including description" do
-      get "/shelves/#{@user.slug}"
-      # save_and_open_page
-      click_link "The Illustrated Man"
-      follow_redirect!
+      visit "/shelves/#{@user.slug}"
+      within "#all-tab" do
+        VCR.use_cassette('fetch_book_info') do
+          click_link "The Martian Chronicles"
+        end
+      end
+      save_page
 
-      expect(page.current_path).to eq("/books/the-illustrated-man")
-      expect(page.body).to include('The Illustrated Man')
+      expect(page.current_path).to eq("/books/tom/the-martian-chronicles")
+      expect(page.body).to include('The Martian Chronicles')
       expect(page.body).to include('Ray Bradbury')
-      page.has_text? "That The Illustrated Man has remained in print since being published in 1951 is fair testimony to the universal appeal of Ray Bradbury's work."
+      expect(page.body).to include("The Martian Chronicles tells the story of humanity’s repeated attempts to colonize the red planet. The first men were few. Most succumbed to a disease they called the Great Loneliness when they saw their home planet dwindle to the size of a fist. They felt they had never been born.")
     end
-
   end
 
 end
