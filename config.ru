@@ -15,3 +15,5 @@ use ReviewsController
 use ShelvesController
 use UsersController
 run ApplicationController
+
+Capybara.app = ApplicationController

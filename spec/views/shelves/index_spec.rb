@@ -30,24 +30,25 @@ describe 'Shelf view' do
     click_button "Login"
   end
 
-  context "when the user logs in and clicks on the 'myBooks' link" do
+  describe "when the user logs in and clicks on the 'myBooks' link", js: true do
 
-    it "displays 'all' the user's books by default" do
+    it "displays 'all' the user's books by default", :driver => :webkit do
       visit "/shelves/#{@user.slug}"
-
+      # REVIEW:
       page.has_text?('The Martian Chronicles', {exact: true})
       page.has_text?('The Illustrated Man', {exact: true})
       page.has_text?('Foundation', {exact: true})
     end
 
-    it "displays the books in the 'read' shelf when clicking on the 'read' link" do
+    # REVIEW: not working properly
+    it "displays the books in the 'read' shelf when clicking on the 'read' link", :driver => :webkit do
       visit "/shelves/#{@user.slug}"
       find('#read-link').click
-      binding.pry
+      save_and_open_page
       page.has_css?('.read-tab.active') # visible tab
-      page.has_css?('.all-tab.active')
-      page.has_css?('.reading-tab.active')
-      page.has_css?('.to-read-tab.active')
+      page.has_css?('.all-tab.false')
+      page.has_css?('.reading-tab.false')
+      page.has_css?('.to-read-tab.false')
     end
 
     it "displays the books in the 'to-read' shelf when clicking on the 'to read' link" do

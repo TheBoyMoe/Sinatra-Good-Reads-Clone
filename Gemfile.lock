@@ -31,6 +31,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-webkit (1.1.0)
+      capybara (~> 2.0, >= 2.0.2)
+      json
     coderay (1.1.2)
     concurrent-ruby (1.0.5)
     crack (0.4.3)
@@ -133,6 +136,7 @@ DEPENDENCIES
   activerecord
   bcrypt
   capybara
+  capybara-webkit
   database_cleaner!
   nokogiri
   pry
