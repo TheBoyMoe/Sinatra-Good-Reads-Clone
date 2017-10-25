@@ -50,36 +50,37 @@ describe 'Shelf view' do
       # page.has_css?('.reading-tab')
       # page.has_css?('.to-read-tab')
 
-      has_no_text?(:visible, 'The Martian Chronicles', {exact: true})
-      has_no_text?(:visible, 'The Illustrated Man', {exact: true})
-      has_no_text?(:visible, 'Foundation', {exact: true})
+      #has_no_text?(:visible, 'The Martian Chronicles', {exact: true})
+      # has_no_text?(:visible, 'The Illustrated Man', {exact: true})
+      # has_no_text?(:visible, 'Foundation', {exact: true})
+
+      expect(page).to have_text('The Martian Chronicles')
+      expect(page).not_to have_text('The Illustrated Man')
+      expect(page).not_to have_text('Foundation')
     end
 
     it "displays the books in the 'to-read' shelf when clicking on the 'to read' link" do
       visit "/shelves/#{@user.slug}"
       find('#to-read-link').click
 
-      has_text?(:visible, 'The Illustrated Man', {exact: true})
-      has_no_text?(:visible, 'The Martian Chronicles', {exact: true})
-      has_no_text?(:visible, 'Foundation', {exact: true})
+      # has_no_text?(:visible, 'The Illustrated Man')
+      # has_no_text?(:visible, 'The Martian Chronicles')
+      # has_no_text?(:visible, 'Foundation')
+      expect(page).to have_text('The Illustrated Man')
+      expect(page).not_to have_text('The Martian Chronicles')
+      expect(page).not_to have_text('Foundation')
     end
 
     it "displays the books in the 'reading' shelf when clicking on the 'reading' link" do
       visit "/shelves/#{@user.slug}"
       find('#reading-link').click
 
-      has_text?(:visible, 'Foundation', {exact: true})
-      has_no_text?(:visible, 'The Illustrated Man', {exact: true})
-      has_no_text?(:visible, 'The Martian Chronicles', {exact: true})
     end
 
     it "displays all the books when the user clicks on the 'all' link" do
       visit "/shelves/#{@user.slug}"
       find('#all-link').click
 
-      has_text?('The Martian Chronicles', {exact: true})
-      has_text?('The Illustrated Man', {exact: true})
-      has_text?('Foundation', {exact: true})
     end
 
   end
@@ -92,7 +93,6 @@ describe 'Shelf view' do
           click_link "The Martian Chronicles"
         end
       end
-      save_page
 
       expect(page.current_path).to eq("/books/tom/the-martian-chronicles")
       expect(page.body).to include('The Martian Chronicles')

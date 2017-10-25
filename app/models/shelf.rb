@@ -8,9 +8,7 @@ class Shelf < ActiveRecord::Base
   end
 
   def self.find_by_slug(slug, current_user_id)
-    Shelf.all.find do |shelf|
-      shelf.slug == slug && shelf.user_id == current_user_id
-    end
+    Shelf.where(user_id: current_user_id).find { |shelf| shelf.slug == slug }
   end
-  
+
 end
